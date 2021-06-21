@@ -17,3 +17,15 @@ def users():
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+
+@user_routes.route('/<int:id>/watchlist')
+@login_required
+def watchlist(id):
+    return {"message": "user watchlist page"}
+
+
+@user_routes.route('/<int:id>/portfolio')
+@login_required
+def portfolio(id):
+    return {"message": "user portfolio page"}
