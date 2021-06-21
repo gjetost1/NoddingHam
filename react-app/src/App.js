@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
+import AlpacaStream from "./components/AlpacaStream";
 import { authenticate } from "./store/session";
 import "./assets/main.css";
 
@@ -41,6 +42,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
+        </ProtectedRoute>
+        <ProtectedRoute path="/alpacastream" exact={true}>
+          <AlpacaStream />
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true}></ProtectedRoute>
       </Switch>
