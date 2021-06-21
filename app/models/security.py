@@ -9,13 +9,13 @@ class Security(db.Model):
     ticker = db.Column(db.String(10), nullable=False)
     type = db.Column(db.String, nullable=False)
 
-    user = relationship("UserSecurity",
-                        back_populates="security",
-                        cascade="all, delete-orphan")
+    users = relationship("User",
+                         secondary="user_securities",
+                         back_populates="securities")
 
     def to_dict(self):
         return {
           "id": self.id,
           "ticker": self.ticker,
-          "email": self.email
+          "type": self.type
         }

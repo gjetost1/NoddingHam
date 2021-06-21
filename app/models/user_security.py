@@ -8,6 +8,3 @@ class UserSecurity(db.Model):
     relation = db.Column(db.String(30), nullable=False)
     userId = db.Column(db.Integer, db.ForeignKey("users.id"))
     securityId = db.Column(db.Integer, db.ForeignKey("securities.id"))
-
-    users = relationship("User", back_populates="user_security")
-    securities = relationship("Security", back_populates="user_security")
