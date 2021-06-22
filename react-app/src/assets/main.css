@@ -451,10 +451,6 @@ img {
   max-width: 80rem;
 }
 
-.flex-1 {
-  flex: 1 1 0%;
-}
-
 @keyframes spin {
   to {
     transform: rotate(360deg);
