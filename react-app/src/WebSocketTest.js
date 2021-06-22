@@ -76,4 +76,4 @@ export default WebSocketTest;
 
 // {"action": "auth", "key": "AKAH50HMXHBHFPJF6G4R", "secret": "KE0Uoia7scWUpFywwVHcWNYVXK80kxkzDC1W7dDE"}
 
-// {"action":"subscribe","trades":["AAPL"],"quotes":["AMD","CLDR"],"bars":["AAPL","VOO"]}
+// {"action":"subscribe","trades":["OPEN"],"quotes":["GS","GLD"],"bars":["GS","GLD"]}

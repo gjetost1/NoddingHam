@@ -20,8 +20,21 @@ const NavBar = () => {
             </li>
             {!user && (
               <li>
-                <NavLink to="/" exact={true} activeClassName="active">
+                <NavLink
+                  to="/login"
+                  exact={true}
+                  activeClassName="active"
+                  className="px-8"
+                >
                   Login
+                </NavLink>
+                <NavLink
+                  to="/sign-up"
+                  exact={true}
+                  activeClassName="active"
+                  className="px-8"
+                >
+                  Sign up
                 </NavLink>
               </li>
             )}
