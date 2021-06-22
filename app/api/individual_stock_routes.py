@@ -4,9 +4,11 @@ from app.models import db, Security
 
 individual_stock_routes = Blueprint("individual-stock", __name__)
 
-# Grab ticker for individual securities
+# INDIVIDUAL SECURITIES
+
 @individual_stock_routes.route('/securities/<ticker>')
 def individual_stock(ticker):
+    # Grab ticker for individual securities
     # Query database for individual interpolated ticker
     security = [Security.query.get(ticker)]
 
