@@ -1,8 +1,21 @@
 from flask import Blueprint, jsonify
-from app.models import db
+from app.utils import get_historical_data
+from app.models import db, Security
 
-individual_stock_routes = Blueprint("individual-stock", __name__)
 
+# Grab ticker for individual securities
 @individual_stock_routes.route('/securities/<ticker>')
-def individual_stock():
-    security = Securities.query.filter()
+def individual_stock(ticker):
+    security = [Security.query.get(ticker)]
+
+    historical_data = get_historical_data(security).df
+    historical_data_dict = historical_data.to_dict()
+    res = dict()
+    
+    for key, value in historical_data_dict.items():
+        new_key = f"{key[0]}-{key[1]}"
+        res[new_key] = value
+
+    print(res)
+
+    return res
