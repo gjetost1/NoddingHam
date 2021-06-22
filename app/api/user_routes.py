@@ -26,7 +26,7 @@ def user(id):
 # WATCHLIST
 
 @user_routes.route('/<int:user_id>/watchlist', methods=['GET'])
-# @login_required
+@login_required
 def watchlist(user_id):
     tickers = get_relation(user_id, "portfolio")
     historical_data = get_historical_data(tickers).df
@@ -37,7 +37,7 @@ def watchlist(user_id):
 
 @user_routes.route('/<int:user_id>/watchlist/<ticker>',
                    methods=['POST', 'DELETE'])
-# @login_required
+@login_required
 def watchlist_edit(user_id, ticker):
     security = Security.query.filter(Security.ticker == ticker).first()
 
@@ -50,10 +50,11 @@ def watchlist_edit(user_id, ticker):
     else:
         return abort(404)
 
+
 # PORTFOLIO
 
 @user_routes.route('/<int:user_id>/portfolio', methods=['GET'])
-# @login_required
+@login_required
 def portfolio(user_id):
     tickers = get_relation(user_id, "portfolio")
     historical_data = get_historical_data(tickers).df
@@ -64,7 +65,7 @@ def portfolio(user_id):
 
 @user_routes.route('/<int:user_id>/portfolio/<ticker>',
                    methods=['POST', 'DELETE'])
-# @login_required
+@login_required
 def portfolio_edit(user_id, ticker):
     security = Security.query.filter(Security.ticker == ticker).first()
 
