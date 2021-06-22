@@ -43,9 +43,12 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path="/" exact={true}>
+        <ProtectedRoute path="/portfolio" exact={true}>
           <WebSocketTest />
         </ProtectedRoute>
+        <Route path="/" exact={true}>
+          <h1>Hello wold</h1>
+        </Route>
       </Switch>
     </BrowserRouter>
   );

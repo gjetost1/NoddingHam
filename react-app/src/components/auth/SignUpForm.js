@@ -35,69 +35,29 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to="/" />;
+    return <Redirect to="/portfolio" />;
   }
 
   return (
-    // <form onSubmit={onSignUp}>
-    //   <div>
-    //     <label>User Name</label>
-    //     <input
-    //       type="text"
-    //       name="username"
-    //       onChange={updateUsername}
-    //       value={username}
-    //     ></input>
-    //   </div>
-    //   <div>
-    //     <label>Email</label>
-    //     <input
-    //       type="text"
-    //       name="email"
-    //       onChange={updateEmail}
-    //       value={email}
-    //     ></input>
-    //   </div>
-    //   <div>
-    //     <label>Password</label>
-    //     <input
-    //       type="password"
-    //       name="password"
-    //       onChange={updatePassword}
-    //       value={password}
-    //     ></input>
-    //   </div>
-    //   <div>
-    //     <label>Repeat Password</label>
-    //     <input
-    //       type="password"
-    //       name="repeat_password"
-    //       onChange={updateRepeatPassword}
-    //       value={repeatPassword}
-    //       required={true}
-    //     ></input>
-    //   </div>
-    //   <button type="submit">Sign Up</button>
-    // </form>
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-black flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <img
           className="mx-auto h-12 w-auto"
           src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
           alt="Workflow"
         />
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
           Sign up
         </h2>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={onSignUp}>
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-white"
               >
                 Email address
               </label>
@@ -115,7 +75,7 @@ const SignUpForm = () => {
             <div>
               <label
                 htmlFor="username"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-white"
               >
                 Username
               </label>
@@ -134,7 +94,7 @@ const SignUpForm = () => {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-white"
               >
                 Password
               </label>
@@ -153,7 +113,7 @@ const SignUpForm = () => {
             <div>
               <label
                 htmlFor="repeat-password"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-white"
               >
                 Confirm password
               </label>
@@ -173,7 +133,7 @@ const SignUpForm = () => {
             <div>
               <button
                 type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-pink-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
               >
                 Sign up
               </button>
