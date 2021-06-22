@@ -1,10 +1,13 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, request
 from flask_login import login_required
-from app.models import User, Security, UserSecurity
-from sqlalchemy.orm import joinedload
+from app.models import User, Security
+from app.utils.api import get_historical_data, remap_keys
+from app.utils.database import post_relation, delete_relation
 
 user_routes = Blueprint('users', __name__)
 
+
+# USER AUTHENTICATION
 
 @user_routes.route('/')
 @login_required
@@ -20,28 +23,57 @@ def user(id):
     return user.to_dict()
 
 
-@user_routes.route('/<int:id>/watchlist', methods=['GET'])
+# WATCHLIST
+
+@user_routes.route('/<int:user_id>/watchlist', methods=['GET'])
 # @login_required
-def watchlist(id):
-    # query database for tickers associated with a userId
-    # make an api call for the stock data of each ticker
-    # send back the stock info to the front end
-    user_data = User.query.get_or_404(id)
+def watchlist(user_id):
+    user_data = User.query.get_or_404(user_id)
     tickers = [security.ticker for security in user_data.securities]
 
+    historical_data = get_historical_data(tickers).df
+    watchlist_securities = remap_keys(historical_data.to_dict())
 
-    return {"message": "user watchlist page", "tickers": tickers}
+    return watchlist_securities
 
 
-@user_routes.route('/<int:id>/portfolio', methods=['GET'])
+@user_routes.route('/<int:user_id>/watchlist/<ticker>',
+                   methods=['POST', 'DELETE'])
 # @login_required
-def portfolio(id):
-    # query database for tickers associated with a userId
-    # make an api call for the stock data of each ticker
-    # send back the stock info to the front end
+def watchlist_edit(user_id, ticker):
+    security = Security.query.filter(Security.ticker == ticker).first()
 
-    user_data = User.query.get_or_404(id)
+    if request.method == "POST":
+        post_relation(user_id, security, ticker, "watchlist")
+        return {"message": "Posted watchlist security"}
+    else:
+        delete_relation(user_id, ticker, "watchlist")
+        return {"message": "Deleted watchlist security"}
+
+
+# PORTFOLIO
+
+@user_routes.route('/<int:user_id>/portfolio', methods=['GET'])
+# @login_required
+def portfolio(user_id):
+    user_data = User.query.get_or_404(user_id)
     tickers = [security.ticker for security in user_data.securities]
 
+    historical_data = get_historical_data(tickers).df
+    portfolio_securities = remap_keys(historical_data.to_dict())
 
-    return {"message": "user portfolio page", "tickers": tickers}
+    return portfolio_securities
+
+
+@user_routes.route('/<int:user_id>/portfolio/<ticker>',
+                   methods=['POST', 'DELETE'])
+# @login_required
+def portfolio_edit(user_id, ticker):
+    security = Security.query.filter(Security.ticker == ticker).first()
+
+    if request.method == "POST":
+        post_relation(user_id, security, ticker, "portfolio")
+        return {"message": "Posted portfolio security"}
+    else:
+        delete_relation(user_id, ticker, "portfolio")
+        return {"message": "Deleted portfolio security"}

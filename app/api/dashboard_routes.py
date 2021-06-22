@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.utils import get_historical_data, remap_keys
+from app.utils.api import get_historical_data, remap_keys
 
 dashboard_routes = Blueprint("dashboard", __name__)
 
@@ -9,6 +9,6 @@ def home_page():
     tickers = ["AAPL", "AMZN", "GOOG"]
 
     historical_data = get_historical_data(tickers).df
-    res = remap_keys(historical_data.to_dict())
+    dashboard_securities = remap_keys(historical_data.to_dict())
 
-    return res
+    return dashboard_securities
