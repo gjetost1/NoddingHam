@@ -10,6 +10,6 @@ def individual_stock(ticker):
     # Query database for individual interpolated ticker
     security = [Security.query.get(ticker)]
 
-    historical_data = get_historical_data(tickers).df
+    historical_data = get_historical_data(security).df
     res = remap_keys(historical_data.to_dict())
     return res
