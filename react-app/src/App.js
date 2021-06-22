@@ -10,7 +10,7 @@ import User from "./components/User";
 import AlpacaStream from "./components/AlpacaStream";
 import { authenticate } from "./store/session";
 import "./assets/main.css";
-import WebSocket from 'ws';
+
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -47,7 +47,6 @@ function App() {
         <ProtectedRoute path="/alpacastream" exact={true}>
           <AlpacaStream />
         </ProtectedRoute>
-        <ProtectedRoute path="/" exact={true}></ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );
