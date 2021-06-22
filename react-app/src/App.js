@@ -9,6 +9,7 @@ import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./store/session";
 import "./assets/main.css";
+import WebSocketTest from "./WebSocketTest";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -42,7 +43,9 @@ function App() {
         <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path="/" exact={true}></ProtectedRoute>
+        <ProtectedRoute path="/" exact={true}>
+          <WebSocketTest />
+        </ProtectedRoute>
       </Switch>
     </BrowserRouter>
   );
