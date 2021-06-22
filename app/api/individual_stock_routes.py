@@ -6,6 +6,7 @@ from app.models import db, Security
 # Grab ticker for individual securities
 @individual_stock_routes.route('/securities/<ticker>')
 def individual_stock(ticker):
+    # Query database for individual interpolated ticker
     security = [Security.query.get(ticker)]
 
     historical_data = get_historical_data(security).df
