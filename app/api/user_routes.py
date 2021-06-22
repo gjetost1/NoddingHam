@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, abort
 from flask_login import login_required
 from app.models import User, Security, UserSecurity
 from app.utils.api import get_historical_data, remap_keys
@@ -44,10 +44,11 @@ def watchlist_edit(user_id, ticker):
     if request.method == "POST":
         post_relation(user_id, security, ticker, "watchlist")
         return {"message": "Posted watchlist security"}
-    else:
+    elif request.method == "DELETE":
         delete_relation(user_id, ticker, "watchlist")
         return {"message": "Deleted watchlist security"}
-
+    else:
+        return abort(404)
 
 # PORTFOLIO
 
@@ -70,6 +71,8 @@ def portfolio_edit(user_id, ticker):
     if request.method == "POST":
         post_relation(user_id, security, ticker, "portfolio")
         return {"message": "Posted portfolio security"}
-    else:
+    elif request.method == "DELETE":
         delete_relation(user_id, ticker, "portfolio")
         return {"message": "Deleted portfolio security"}
+    else:
+        return abort(404)
