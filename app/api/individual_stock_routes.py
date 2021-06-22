@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from app.utils import get_historical_data
+from app.utils import get_historical_data, remap_keys
 from app.models import db, Security
 
 individual_stock_routes = Blueprint("individual-stock", __name__)
