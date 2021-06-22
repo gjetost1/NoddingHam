@@ -1,4 +1,14 @@
-from app.models import db, User, UserSecurity, Security
+from app.models import db, UserSecurity, Security
+
+
+def get_relation(user_id, relation):
+    portfolio = UserSecurity.query.filter(UserSecurity.user_id == user_id,
+                                          UserSecurity.relation == relation).all()
+    security_ids = [security.security_id for security in portfolio]
+    securities = Security.query.filter(Security.id.in_(security_ids)).all()
+    tickers = [security.ticker for security in securities]
+
+    return tickers
 
 
 def post_relation(user_id, security, ticker, relation):

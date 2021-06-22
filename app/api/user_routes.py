@@ -1,8 +1,8 @@
 from flask import Blueprint, request
 from flask_login import login_required
-from app.models import User, Security
+from app.models import User, Security, UserSecurity
 from app.utils.api import get_historical_data, remap_keys
-from app.utils.database import post_relation, delete_relation
+from app.utils.database import get_relation, post_relation, delete_relation
 
 user_routes = Blueprint('users', __name__)
 
@@ -28,9 +28,7 @@ def user(id):
 @user_routes.route('/<int:user_id>/watchlist', methods=['GET'])
 # @login_required
 def watchlist(user_id):
-    user_data = User.query.get_or_404(user_id)
-    tickers = [security.ticker for security in user_data.securities]
-
+    tickers = get_relation(user_id, "portfolio")
     historical_data = get_historical_data(tickers).df
     watchlist_securities = remap_keys(historical_data.to_dict())
 
@@ -56,9 +54,7 @@ def watchlist_edit(user_id, ticker):
 @user_routes.route('/<int:user_id>/portfolio', methods=['GET'])
 # @login_required
 def portfolio(user_id):
-    user_data = User.query.get_or_404(user_id)
-    tickers = [security.ticker for security in user_data.securities]
-
+    tickers = get_relation(user_id, "portfolio")
     historical_data = get_historical_data(tickers).df
     portfolio_securities = remap_keys(historical_data.to_dict())
 
