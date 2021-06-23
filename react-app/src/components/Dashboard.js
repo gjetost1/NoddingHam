@@ -5,6 +5,13 @@ import { NavLink } from 'react-router-dom';
 
 const Dashboard = () => {
     const dispatch = useDispatch();
+    const [data, setData] = useState({});
+
+    useEffect(() => {
+        (async function() {
+
+        })();
+    })
 
     // cool graph
     // top 3 securities by market cap
