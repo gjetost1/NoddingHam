@@ -26,7 +26,7 @@ def user(id):
 # WATCHLIST
 
 @user_routes.route('/<int:user_id>/watchlist', methods=['GET'])
-@login_required
+# @login_required
 def watchlist(user_id):
     tickers = get_relation(user_id, "portfolio")
     historical_data = get_historical_data(tickers).df

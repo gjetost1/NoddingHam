@@ -288,7 +288,6 @@ const staticData = [
 ];
 
 function Lines({ data }) {
-  console.log(data);
 
   return (
     <>

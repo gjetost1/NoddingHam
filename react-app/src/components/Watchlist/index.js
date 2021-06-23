@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getIndividualSecurity, getWatchlist } from "../../store/stock";
 import { useParams } from "react-router";
 import Lines from "../Charts/Lines";
@@ -12,8 +12,6 @@ const stats = [
   { name: 'Open Price', stat: '58.16%', previousStat: '56.14%', change: '2.02%', changeType: 'increase' },
   { name: 'Close Price', stat: '24.57%', previousStat: '28.62%', change: '4.05%', changeType: 'decrease' },
 ]
-
-//backend query here
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -28,15 +26,20 @@ export default function Watchlist() {
   useEffect(() => {
       (async function() {
         const newData = await dispatch(getWatchlist(userId))
-        let dataObj = {}
+        let dataArray = []
 
         for (let [ticker, points] of Object.entries(newData)) {
-          dataObj["id"] = ticker
-          dataObj["color"] = "hsl(183, 70%, 50%)"
-          dataObj["data"] = []
-          points.forEach(point => dataObj["data"] = dataObj["data"].concat({"x": point.date, "y": point.close}))
+          let nextSecurity = {}
+          nextSecurity["id"] = ticker
+          const color = Math.floor(Math.random() * 255)
+          nextSecurity["color"] = `hsl(${color}, 70%, 50%)`
+          nextSecurity["data"] = []
+          points.forEach(point => nextSecurity["data"] = nextSecurity["data"].concat({"x": point.date, "y": point.close}))
+          console.log(nextSecurity["data"])
+          // dataArray = [...dataArray, [nextSecurity]]
+          dataArray = [...dataArray, nextSecurity]
         }
-        setData([...data, [dataObj]])
+        setData(dataArray)
         setIsLoaded(true)
       })();
   },[])
@@ -92,9 +95,8 @@ export default function Watchlist() {
         ))}
         </dl>
         <div style={{height: "500px", width: "1000px"}}>
-            { data.map((security, i) =>  <Lines key={i} data={security} /> )}
-
-
+            {/* { data.map((security, i) => <Lines key={i} data={security} /> )} */}
+            <Lines data={data} />
         </div>
 
     </div>

@@ -7,7 +7,6 @@ def get_relation(user_id, relation):
     security_ids = [security.security_id for security in portfolio]
     securities = Security.query.filter(Security.id.in_(security_ids)).all()
     tickers = [security.ticker for security in securities]
-
     return tickers
 
 

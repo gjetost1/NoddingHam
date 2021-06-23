@@ -44,14 +44,21 @@ export const getIndividualSecurity = (ticker) => async (dispatch) => {
 };
 
 export const getWatchlist = (userId) => async (dispatch) => {
-  const response = await fetch(`/api/${userId}/watchlist`);
+  const response = await fetch(`/api/users/${userId}/watchlist`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+  });
+
   const data = await response.json();
   if (data.errors) return;
   dispatch(getStock(GET_WATCHLIST, data));
+  return data
 };
 
 export const addWatchList = (userId, ticker) => async (dispatch) => {
-  const response = await fetch(`/api/${userId}/watchlist/${ticker}`, {
+  const response = await fetch(`/api/users/${userId}/watchlist/${ticker}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -63,7 +70,7 @@ export const addWatchList = (userId, ticker) => async (dispatch) => {
 };
 
 export const deleteFromWatchList = (userId, ticker) => async (dispatch) => {
-  const response = await fetch(`/api/${userId}/watchlist/${ticker}`, {
+  const response = await fetch(`/api/users/${userId}/watchlist/${ticker}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -75,7 +82,7 @@ export const deleteFromWatchList = (userId, ticker) => async (dispatch) => {
 };
 
 export const getPortfolio = (userId) => async (dispatch) => {
-  const response = await fetch(`/api/${userId}/portfolio`, {
+  const response = await fetch(`/api/users/${userId}/portfolio`, {
     headers: {
       "Content-Type": "application/json",
     },
@@ -86,7 +93,7 @@ export const getPortfolio = (userId) => async (dispatch) => {
 };
 
 export const addToPortfolio = (userId, ticker) => async (dispatch) => {
-  const response = await fetch(`/api/${userId}/portfolio/${ticker}`, {
+  const response = await fetch(`/api/users/${userId}/portfolio/${ticker}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -98,7 +105,7 @@ export const addToPortfolio = (userId, ticker) => async (dispatch) => {
 };
 
 export const deleteFromPortfolio = (userId, ticker) => async (dispatch) => {
-  const response = await fetch(`/api/${userId}/portfolio/${ticker}`, {
+  const response = await fetch(`/api/users/${userId}/portfolio/${ticker}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
