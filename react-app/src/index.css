@@ -1,1 +1,19 @@
 /* TODO Add site wide styles */
+.logo-container {
+    width: 10vw;
+    display:flex;
+    justify-content: center;
+}
+
+.logo {
+ margin: auto;
+ width: 10vw;
+ display:flex;
+ justify-content: center;
+
+}
+
+img {
+    display: flex;
+    justify-content: center;
+}
