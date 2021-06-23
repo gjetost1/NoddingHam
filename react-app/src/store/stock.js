@@ -36,11 +36,7 @@ export const dashboard = () => async (dispatch) => {
 };
 
 export const getIndividualSecurity = (ticker) => async (dispatch) => {
-  const response = await fetch(`/api/securities/${ticker}`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(`/api/securities/${ticker}`);
   const data = await response.json();
   if (data.errors) return;
   dispatch(getStock(GET_SECURITY, data));
