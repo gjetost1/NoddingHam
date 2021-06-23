@@ -14,8 +14,7 @@ const pinkButtonClassName =
     return (
 
       <div className="bg-black">
-        <div class="logo-container"> <img src={logo} class="logo" /></div>
-
+      <div class="logo-container"> <img src={logo} class="logo" /></div>
       <nav className="max-w-7xl mx-auto  lg:px-8" aria-label="Top">
         <div className="w-full py-6 border-b border-indigo-500 lg:border-none">
           <ul className="flex flex-row justify-between">

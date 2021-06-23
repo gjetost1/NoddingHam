@@ -1,8 +1,9 @@
 /* TODO Add site wide styles */
 .logo-container {
-    width: 10vw;
+    height:5vh;
     display:flex;
     justify-content: center;
+    align-items: center;
 }
 
 .logo {
@@ -11,9 +12,4 @@
  display:flex;
  justify-content: center;
 
-}
-
-img {
-    display: flex;
-    justify-content: center;
 }
