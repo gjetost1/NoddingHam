@@ -14,6 +14,7 @@ import WebSocketTest from "./WebSocketTest";
 import Portfolio from "./components/Portfolio";
 import Feed from "./components/Feed";
 import IndividualStock from "./components/IndividualStock";
+import Watchlist from "./components/Watchlist";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -49,6 +50,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/portfolio" exact={true}>
           <WebSocketTest />
+        </ProtectedRoute>
+        <ProtectedRoute path="/watchlist/:userId" exact={true}>
+          <Watchlist />
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true} >
           <Dashboard />

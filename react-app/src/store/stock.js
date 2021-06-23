@@ -44,11 +44,7 @@ export const getIndividualSecurity = (ticker) => async (dispatch) => {
 };
 
 export const getWatchlist = (userId) => async (dispatch) => {
-  const response = await fetch(`/api/${userId}/watchlist`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(`/api/${userId}/watchlist`);
   const data = await response.json();
   if (data.errors) return;
   dispatch(getStock(GET_WATCHLIST, data));
