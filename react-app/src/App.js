@@ -11,6 +11,7 @@ import { authenticate } from "./store/session";
 import "./assets/main.css";
 import WebSocketTest from "./WebSocketTest";
 import Portfolio from "./components/Portfolio";
+import IndividualStock from "./components/IndividualStock";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -46,6 +47,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/portfolio" exact={true}>
           <WebSocketTest />
+        </ProtectedRoute>
+        <ProtectedRoute path="/individualstock" exact={true}>
+          <IndividualStock />
         </ProtectedRoute>
         <Route path="/" exact={true}>
           <Portfolio />
