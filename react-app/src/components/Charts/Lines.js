@@ -288,14 +288,12 @@ const staticData = [
 ];
 
 function Lines({ data }) {
-  //[{id: ticker
-  //color: color
-  // data [{x: day, y:price }]
   console.log(data);
 
   return (
+    <>
     <ResponsiveLine
-      data={staticData}
+      data={data}
       margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
       xScale={{ type: "point" }}
       yScale={{
@@ -310,7 +308,7 @@ function Lines({ data }) {
       axisRight={null}
       axisBottom={{
         orient: "bottom",
-        tickSize: 5,
+        tickSize: 100,
         tickPadding: 5,
         tickRotation: 0,
         legend: "transportation",
@@ -359,6 +357,7 @@ function Lines({ data }) {
         },
       ]}
     />
+    </>
   );
 }
 

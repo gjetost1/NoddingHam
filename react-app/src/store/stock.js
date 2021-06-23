@@ -40,6 +40,7 @@ export const getIndividualSecurity = (ticker) => async (dispatch) => {
   const data = await response.json();
   if (data.errors) return;
   dispatch(getStock(GET_SECURITY, data));
+  return data
 };
 
 export const getWatchlist = (userId) => async (dispatch) => {

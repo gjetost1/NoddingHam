@@ -23,14 +23,25 @@ export default function IndividualStock() {
   const {ticker} = useParams()
   const dispatch = useDispatch();
   const [data, setData] = useState({});
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
       (async function() {
         const newData = await dispatch(getIndividualSecurity(ticker))
-        setData(newData)
+        let dataObj = {}
+
+        for (let [ticker, points] of Object.entries(newData)) {
+          dataObj["id"] = ticker
+          dataObj["color"] = "hsl(183, 70%, 50%)"
+          dataObj["data"] = []
+          points.forEach(point => dataObj["data"] = dataObj["data"].concat({"x": point.date, "y": point.close}))
+        }
+        setData([dataObj])
+        setIsLoaded(true)
       })();
   },[])
 
-  return (
+  return isLoaded && (
 
     <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">{
 
@@ -80,9 +91,8 @@ export default function IndividualStock() {
             </div>
         ))}
         </dl>
-        <div>
-             {/* {for security in data} */}
-            <Lines/>
+        <div style={{height: "200px", width: "500px"}}>
+            <Lines data={data}/>
         </div>
         {/* graph here */}
 
