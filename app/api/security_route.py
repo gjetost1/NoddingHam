@@ -7,8 +7,10 @@ security_route = Blueprint("individual-security", __name__)
 # INDIVIDUAL SECURITY
 
 
-@security_route.route('/securities/<ticker>')
+@security_route.route('/<ticker>')
 def individual_security(ticker):
-    historical_data = get_historical_data([ticker]).df
+    historical_data = get_historical_data([ticker.upper()]).df
     individual_security = remap_keys(historical_data.to_dict())
+
+    # return "route success"
     return individual_security

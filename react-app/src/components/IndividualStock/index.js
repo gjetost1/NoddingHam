@@ -1,20 +1,34 @@
 import React, { useEffect, useState } from "react";
-
+import { useDispatch } from "react-redux";
+import { getIndividualSecurity } from "../../store/stock";
+import { useParams } from "react-router";
+import Lines from "../Charts/Lines";
 
 import { ArrowSmDownIcon, ArrowSmUpIcon } from '@heroicons/react/solid'
 
-//fetch here
+// websocket fetch here
 const stats = [
   { name: 'Volume', stat: '71,897', previousStat: '70,946', change: '12%', changeType: 'increase' },
   { name: 'Open Price', stat: '58.16%', previousStat: '56.14%', change: '2.02%', changeType: 'increase' },
   { name: 'Close Price', stat: '24.57%', previousStat: '28.62%', change: '4.05%', changeType: 'decrease' },
 ]
 
+//backend query here
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function IndividualStock() {
+  const {ticker} = useParams()
+  const dispatch = useDispatch();
+  const [data, setData] = useState({});
+  useEffect(() => {
+      (async function() {
+        const newData = await dispatch(getIndividualSecurity(ticker))
+        setData(newData)
+      })();
+  },[])
 
   return (
 
@@ -65,8 +79,13 @@ export default function IndividualStock() {
             </dd>
             </div>
         ))}
-        {/* graph here */}
         </dl>
+        <div>
+             {/* {for security in data} */}
+            <Lines/>
+        </div>
+        {/* graph here */}
+
     </div>
 
     }
