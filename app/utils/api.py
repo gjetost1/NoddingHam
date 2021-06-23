@@ -1,3 +1,4 @@
+from flask import jsonify
 from datetime import datetime, timezone, timedelta
 from alpaca_trade_api.rest import REST
 import os
@@ -27,17 +28,36 @@ def get_historical_data(tickers):
     return historical_data
 
 
+# def remap_keys(mapping):
+#     json_mapping = dict()
+
+#     for parent_key, parent_value in mapping.items():
+#         new_parent_key = f"{parent_key[0]}-{parent_key[1]}"
+#         new_parent_value = dict()
+
+#         for child_key, child_value in parent_value.items():
+#             new_child_key = child_key.strftime("%d-%b-%Y (%H:%M:%S.%f)")
+#             new_parent_value[new_child_key] = child_value
+
+#         json_mapping[new_parent_key] = new_parent_value
+
+#     return json_mapping
+
+
 def remap_keys(mapping):
-    json_mapping = dict()
+    new_mapping = dict()
 
     for parent_key, parent_value in mapping.items():
-        new_parent_key = f"{parent_key[0]}-{parent_key[1]}"
-        new_parent_value = dict()
+        ticker = parent_key[0]
+        metric = parent_key[1]
 
-        for child_key, child_value in parent_value.items():
-            new_child_key = child_key.strftime("%d-%b-%Y (%H:%M:%S.%f)")
-            new_parent_value[new_child_key] = child_value
+        sorting_list = [{"date": k.date(), metric: v} for k, v in parent_value.items()]
+        sorted_data = sorted(sorting_list, key=lambda l: l["date"])
 
-        json_mapping[new_parent_key] = new_parent_value
+        if ticker not in new_mapping:
+            new_mapping[ticker] = [data_point for data_point in sorted_data]
+        else:
+            for index, element in enumerate(new_mapping[ticker]):
+                element[metric] = sorted_data[index][metric]
 
-    return json_mapping
+    return new_mapping
