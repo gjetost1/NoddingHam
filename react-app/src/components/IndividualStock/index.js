@@ -91,10 +91,9 @@ export default function IndividualStock() {
             </div>
         ))}
         </dl>
-        <div style={{height: "200px", width: "500px"}}>
+        <div style={{height: "500px", width: "1000px"}}>
             <Lines data={data}/>
         </div>
-        {/* graph here */}
 
     </div>
 

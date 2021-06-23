@@ -308,10 +308,10 @@ function Lines({ data }) {
       axisRight={null}
       axisBottom={{
         orient: "bottom",
-        tickSize: 100,
+        tickSize: 50,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "transportation",
+        legend: "Date",
         legendOffset: 36,
         legendPosition: "middle",
       }}
@@ -320,11 +320,11 @@ function Lines({ data }) {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "count",
+        legend: "Close Price",
         legendOffset: -40,
         legendPosition: "middle",
       }}
-      pointSize={10}
+      pointSize={1}
       pointColor={{ theme: "background" }}
       pointBorderWidth={2}
       pointBorderColor={{ from: "serieColor" }}
@@ -339,10 +339,10 @@ function Lines({ data }) {
           translateY: 0,
           itemsSpacing: 0,
           itemDirection: "left-to-right",
-          itemWidth: 80,
-          itemHeight: 20,
+          itemWidth: 40,
+          itemHeight: 10,
           itemOpacity: 0.75,
-          symbolSize: 12,
+          symbolSize: 10,
           symbolShape: "circle",
           symbolBorderColor: "rgba(0, 0, 0, .5)",
           effects: [
