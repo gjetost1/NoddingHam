@@ -53,24 +53,15 @@ def watchlist_edit(user_id, ticker):
 
 # PORTFOLIO
 
-# @user_routes.route('/<int:user_id>/portfolio', methods=['GET'])
-# @login_required
-# def portfolio(user_id):
-#     tickers = get_relation(user_id, "portfolio")
-#     historical_data = get_historical_data(tickers).df
-#     portfolio_securities = remap_keys(historical_data.to_dict())
-
-#     return portfolio_securities
-
-# TEST ROUTE
 @user_routes.route('/<int:user_id>/portfolio', methods=['GET'])
-# @login_required
+@login_required
 def portfolio(user_id):
     tickers = get_relation(user_id, "portfolio")
     historical_data = get_historical_data(tickers).df
     portfolio_securities = remap_keys(historical_data.to_dict())
 
-    return "hi"
+    return portfolio_securities
+
 
 @user_routes.route('/<int:user_id>/portfolio/<ticker>',
                    methods=['POST', 'DELETE'])
