@@ -13,6 +13,7 @@ import "./assets/main.css";
 import WebSocketTest from "./WebSocketTest";
 import Portfolio from "./components/Portfolio";
 import Feed from "./components/Feed";
+import IndividualStock from "./components/IndividualStock";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -51,6 +52,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path="/" exact={true}>
           <Dashboard />
+        </ProtectedRoute>
+        <ProtectedRoute path="/individualstock" exact={true}>
+          <IndividualStock />
         </ProtectedRoute>
         <Route path="/" exact={true}>
           {/* <Portfolio /> this is a comment */}
