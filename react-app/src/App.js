@@ -49,11 +49,11 @@ function App() {
         <ProtectedRoute path="/portfolio" exact={true}>
           <WebSocketTest />
         </ProtectedRoute>
-        <ProtectedRoute path="/" exact={true} >
+        <ProtectedRoute path="/" exact={true}>
           <Dashboard />
         </ProtectedRoute>
         <Route path="/" exact={true}>
-          {/* <Portfolio /> */}
+          {/* <Portfolio /> this is a comment */}
           <Feed />
         </Route>
       </Switch>
