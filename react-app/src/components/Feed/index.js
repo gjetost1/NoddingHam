@@ -23,7 +23,7 @@ function Feed() {
     // get user data
     const userId = useSelector((state) => state.session.user.id);
     
-    const tickerInfo = useMarketData(["SBUX"]);
+    const tickerInfo = useMarketData();
 
     return (
       tickerInfo && (
@@ -40,7 +40,7 @@ function Feed() {
                     <div>
                       <p className="text-sm text-right text-gray-500">
                         price {ticker.price}
-                      </p>
+                      </p> 
                     </div>
                   </div>
                 </div>
