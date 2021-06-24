@@ -7,6 +7,11 @@ const DELETE_FROM_WATCHLIST = "stock/DELETE_FROM_WATCHLIST";
 const GET_PORTFOLIO = "stock/GET_PORTFOLIO";
 const ADD_TO_PORTFOLIO = "stock/ADD_PORTFOLIO";
 const DELETE_FROM_PORTFOLIO = "stock/DELETE_FROM_PORTFOLIO";
+const GET_MARKET_HOURS = "stock/GET_MARKET_HOURS";
+//ENV VARS
+const alpaca_key = process.env.REACT_APP_ALPACA_KEY;
+const alpaca_secret = process.env.REACT_APP_ALPACA_SECRET;
+const base_url = process.env.REACT_APP_ALPACA_BASE_URI;
 
 //thunks
 const addStock = (type, payload) => ({
@@ -90,6 +95,7 @@ export const getPortfolio = (userId) => async (dispatch) => {
   const data = await response.json();
   if (data.errors) return;
   dispatch(getStock(GET_PORTFOLIO, data));
+  return data;
 };
 
 export const addToPortfolio = (userId, ticker) => async (dispatch) => {
@@ -114,6 +120,19 @@ export const deleteFromPortfolio = (userId, ticker) => async (dispatch) => {
   const data = await response.json();
   if (data.errors) return;
   dispatch(deleteStock(DELETE_FROM_PORTFOLIO, data));
+};
+
+export const getMarketClock = () => async (dispatch) => {
+  const alpacaHeaders = new Headers();
+  alpacaHeaders.append("APCA-API-KEY-ID", alpaca_key);
+  alpacaHeaders.append("APCA-API-SECRET-KEY", alpaca_secret);
+
+  const response = await fetch(`${base_url}/v2/clock`, {
+    headers: alpacaHeaders,
+  });
+  const data = await response.json();
+  if (data.errors) return;
+  dispatch(getStock(GET_MARKET_HOURS, data));
 };
 
 const initialState = { stock: null };
@@ -153,6 +172,10 @@ export default function reducer(state = initialState, action) {
     case DELETE_FROM_PORTFOLIO:
       newState = Object.assign({}, state);
       newState.deleteFromPortfolio = action.payload;
+      return newState;
+    case GET_MARKET_HOURS:
+      newState = Object.assign({}, state);
+      newState.getMarketHours = action.payload;
       return newState;
     default:
       return state;
