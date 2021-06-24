@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import PostWatchlist from '../Watchlist/postToWatchlist';
+import PostPortfolio from '../Portfolio/postToPortfolio';
 
 
 const Dashboard = () => {
