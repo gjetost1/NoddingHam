@@ -12,9 +12,10 @@ import { authenticate } from "./store/session";
 import "./assets/main.css";
 import WebSocketTest from "./WebSocketTest";
 import Portfolio from "./components/Portfolio";
-import Feed from "./components/Feed";
 import IndividualStock from "./components/IndividualStock";
 import Watchlist from "./components/Watchlist";
+import Feed from "./components/Feed/index";
+import { dashboard, getMarketClock } from "./store/stock";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -24,48 +25,56 @@ function App() {
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
+      await dispatch(getMarketClock());
       setLoaded(true);
     })();
   }, []);
+
+  //
 
   if (!loaded) {
     return null;
   }
 
   return (
-    <BrowserRouter>
-      <NavBar />
-      <Switch>
-        <Route path="/login" exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path="/sign-up" exact={true}>
-          <SignUpForm />
-        </Route>
-        <ProtectedRoute path="/users" exact={true}>
-          <UsersList />
-        </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId" exact={true}>
-          <User />
-        </ProtectedRoute>
-        <ProtectedRoute path="/portfolio" exact={true}>
-          <WebSocketTest />
-        </ProtectedRoute>
-        <ProtectedRoute path="/watchlist/:userId" exact={true}>
-          <Watchlist />
-        </ProtectedRoute>
-        <ProtectedRoute path="/" exact={true} >
-          <Dashboard />
-        </ProtectedRoute>
-        <ProtectedRoute path="/stock/:ticker" exact={true} >
-          <IndividualStock />
-        </ProtectedRoute>
-        <Route path="/" exact={true}>
-          {/* <Portfolio /> this is a comment */}
-          <Feed />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    loaded && (
+      <BrowserRouter>
+        <NavBar />
+        <Switch>
+          <Route path="/login" exact={true}>
+            <LoginForm />
+          </Route>
+          <Route path="/sign-up" exact={true}>
+            <SignUpForm />
+          </Route>
+          <ProtectedRoute path="/users" exact={true}>
+            <UsersList />
+          </ProtectedRoute>
+          <ProtectedRoute path="/users/:userId" exact={true}>
+            <User />
+          </ProtectedRoute>
+          <ProtectedRoute path="/portfolio" exact={true}>
+            {/* <WebSocketTest /> */}
+            <div>
+              <h1 className='text-center pt-8'>Watchlist</h1>
+              <div className='flex flex-row-reverse'>
+                <div className='m-36'><Feed /></div>
+              </div>
+            </div>
+          </ProtectedRoute>
+          <ProtectedRoute path="/watchlist/:userId" exact={true}>
+            <Watchlist />
+          </ProtectedRoute>
+          <ProtectedRoute path="/" exact={true}>
+            <Dashboard />
+          </ProtectedRoute>
+          <ProtectedRoute path="/stock/:ticker" exact={true} >
+            <IndividualStock />
+          </ProtectedRoute>
+          <Route path="/dashboard" exact={true}></Route>
+        </Switch>
+      </BrowserRouter>
+    )
   );
 }
 
