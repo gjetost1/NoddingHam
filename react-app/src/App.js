@@ -56,10 +56,13 @@ function App() {
           <ProtectedRoute path="/portfolio" exact={true}>
             {/* <WebSocketTest /> */}
             <div>
-              <h1 className='text-center pt-8'>Watchlist</h1>
-              <div className='flex flex-row-reverse'>
-                <div className='m-36'><Feed /></div>
+              <h1 className="text-center pt-8">Portfolio</h1>
+              <div className="flex flex-row-reverse">
+                {/* <div className="m-36">
+                  <Feed />
+                </div> */}
               </div>
+              <Portfolio />
             </div>
           </ProtectedRoute>
           <ProtectedRoute path="/watchlist/:userId" exact={true}>
@@ -68,7 +71,7 @@ function App() {
           <ProtectedRoute path="/" exact={true}>
             <Dashboard />
           </ProtectedRoute>
-          <ProtectedRoute path="/stock/:ticker" exact={true} >
+          <ProtectedRoute path="/stock/:ticker" exact={true}>
             <IndividualStock />
           </ProtectedRoute>
           <Route path="/dashboard" exact={true}></Route>
