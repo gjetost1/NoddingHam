@@ -14,9 +14,14 @@ function useMarketData(tickers) {
   );
 
   // get search for data
-  const portfolioData = useSelector((state) => state.stock.portfolio);
+  let portfolioData = useSelector((state) => state.stock.portfolio);
   // get user data
   const userId = useSelector((state) => state.session.user.id);
+
+  if (tickers) {
+    portfolioData = tickers.reduce((acc,curr) => (acc[curr]='',acc),{});
+    console.log("Portfolio Data", portfolioData)
+  }
 
   useEffect(() => {
       if (portfolioData !== undefined) {
@@ -70,6 +75,7 @@ function useMarketData(tickers) {
   useEffect(() => {
     // console.log(connectionStatus);
     if (connectionStatus === "Open" && (portfolioData !== undefined && isLoaded)) {
+      console.log("This is", Object.keys(portfolioData))
       sendJsonMessage({
         action: "subscribe",
         quotes: Object.keys(portfolioData),
@@ -81,10 +87,12 @@ function useMarketData(tickers) {
     if (lastJsonMessage && (isMarketOpen && portfolioData !== undefined)) {
       // console.log(lastJsonMessage);
       lastJsonMessage.forEach((msg) => {
+        if (msg.S !== 0) {
         const currentTickerInfo = { ...tickerInfo };
         console.log(msg)
         currentTickerInfo[msg.S] = { price: msg.ap, name: msg.S };
         setTickerInfo(currentTickerInfo);
+        }
       });
     }
   }, [lastJsonMessage, isMarketOpen]);

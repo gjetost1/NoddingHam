@@ -55,7 +55,10 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path="/portfolio" exact={true}>
             {/* <WebSocketTest /> */}
-            <Feed />
+            <div className='flex-column flex'>
+              <Feed />
+              <div>Hello World</div>
+            </div>
           </ProtectedRoute>
           <ProtectedRoute path="/watchlist/:userId" exact={true}>
             <Watchlist />

@@ -8,6 +8,7 @@ import {
   getPortfolio,
 } from "../../store/stock";
 import useMarketData from "../../websocket/useMarketData";
+import { Link } from 'react-router-dom'
 
 
 function Feed() {
@@ -23,28 +24,29 @@ function Feed() {
     // get user data
     const userId = useSelector((state) => state.session.user.id);
     
-    const tickerInfo = useMarketData(["SBUX"]);
+    const tickerInfo = useMarketData();
 
     return (
       tickerInfo && (
-        <div className="flow-root  bg-gray-600">
-          <ul className="-mb-8">
+        <div style={{ backgroundColor: 'grey'}}>
+            <h1 className='text-white'>Your Dashboard</h1>
+          <ul className="-mb-8 bg-gray-500">
             {Object.values(tickerInfo).map((ticker) => (
-              <div className="relative flex space-x-3">
+              <li className="relative flex space-x-3">
                 <div className="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
-                  <div>
+                  <Link to={`/stock/${ticker.name}`}>
                     {/* this should be a link */}
-                    <span>Stock Name {ticker.name}</span>
-                  </div>
-                  <div className="min-w-0 flex-1 pt-1.5 flex space-x-4">
+                    <span>Ticker {ticker.name}</span>
+                  </Link>
+                  <div className="min-w-0 flex-1 pt-1.5 space-x-4 self-end">
                     <div>
-                      <p className="text-sm text-right text-gray-500">
+                      <p className="text-sm text-right text-pink-500">
                         price {ticker.price}
-                      </p>
+                      </p> 
                     </div>
                   </div>
                 </div>
-              </div>
+              </li>
             ))}
           </ul>
         </div>
