@@ -12,7 +12,6 @@ import useMarketData from "../../websocket/useMarketData";
 
 function Feed() {
     const dispatch = useDispatch();
-    // const [isLoaded, setIsLoaded] = useState(false);
     const [tickers, setTickers] = useState({});
     const [historicalData, setHistoricalData] = useState(null);
     const isMarketOpen = useSelector(
@@ -23,42 +22,9 @@ function Feed() {
     const portfolioData = useSelector((state) => state.stock.portfolio);
     // get user data
     const userId = useSelector((state) => state.session.user.id);
-
-    // useEffect(() => {
-    //     if (portfolioData !== undefined) {
-    //         if (isMarketOpen) {
-    //             let portfolioInfo = []
-    //             // Loop through market historical data
-    //             for (const stock in portfolioData) {
-    //                 // We can add more historical data
-    //                 const name = stock;
-    //                 // Grab most current historical price
-    //                 const price = portfolioData[name][729].close
-    //                 portfolioInfo.push({name, price})
-    //             }
-    //             setHistoricalData(portfolioInfo);
-    //         } else {
-    //             let tickers = Object.keys(portfolioData);
-    //             // Call websocket API
-    //         }
-    //     }
-    // }, [isLoaded, portfolioData])
     
-    // useEffect(async () => {
-    //   if (isLoaded === false) {
-    //       dispatch(getPortfolio(userId));
-    //       setIsLoaded(true);
-    //   }
-    // }, [isLoaded, dispatch]);
+    const tickerInfo = useMarketData(["SBUX"]);
 
-    
-    // loaded dynamic ticker info
-    // this will should only load if the market is open
-    const tickerInfo = useMarketData(["AMD", "CLDR", "GLD", "AAPL", "GS"]);
-    // console.log(tickerInfo)
-        // if (!isLoaded) {
-        //     return <h1>Loading</h1>
-        // }
     return (
       tickerInfo && (
         <div className="flow-root  bg-gray-600">

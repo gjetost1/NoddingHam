@@ -88,6 +88,7 @@ function useMarketData(tickers) {
       });
     }
   }, [lastJsonMessage, isMarketOpen]);
+  
   console.log("These are tickers", tickerInfo)
   delete tickerInfo.undefined
   return tickerInfo;
