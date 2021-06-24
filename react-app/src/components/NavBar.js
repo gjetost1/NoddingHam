@@ -36,6 +36,14 @@ const pinkButtonClassName =
               >
                 Portfolio
               </NavLink>
+              <NavLink
+                  to="/watchlist/1"
+                  exact={true}
+                  activeClassName="active"
+                  className={pinkButtonClassName}
+                >
+                  Watchlist
+                </NavLink>
 
             </li>
             {!user && (
@@ -59,7 +67,10 @@ const pinkButtonClassName =
               </li>
             )}
 
-            {user && <LogoutButton />}
+            {user && (
+            <LogoutButton />
+            )}
+
           </ul>
         </div>
       </nav>

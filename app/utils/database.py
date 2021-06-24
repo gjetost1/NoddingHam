@@ -28,10 +28,13 @@ def post_relation(user_id, security, ticker, relation):
 
 
 def delete_relation(user_id, security, relation):
+
     user_security = UserSecurity.query.filter(UserSecurity.user_id == user_id,
                                               UserSecurity.security_id == security.id,
                                               UserSecurity.relation == relation).first()
+
     db.session.delete(user_security)
     db.session.commit()
+
 
     return None
