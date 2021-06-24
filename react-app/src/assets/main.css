@@ -798,7 +798,6 @@ img {
   background-color: rgba(249, 250, 251, var(--tw-bg-opacity));
 }
 
-
 .bg-gray-500 {
   --tw-bg-opacity: 1;
   background-color: rgba(107, 114, 128, var(--tw-bg-opacity));
@@ -1062,6 +1061,16 @@ img {
   --tw-text-opacity: 1;
   color: rgba(49, 46, 129, var(--tw-text-opacity));
 }
+.text-pink-500 {
+  --tw-text-opacity: 1;
+  color: rgba(236, 72, 153, var(--tw-text-opacity));
+}
+
+.focus\:text-gray-900:focus {
+  --tw-text-opacity: 1;
+  color: rgba(17, 24, 39, var(--tw-text-opacity));
+}
+
 .text-pink-500 {
   --tw-text-opacity: 1;
   color: rgba(236, 72, 153, var(--tw-text-opacity));
