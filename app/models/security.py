@@ -6,7 +6,7 @@ class Security(db.Model):
     __tablename__ = 'securities'
 
     id = db.Column(db.Integer, primary_key=True)
-    ticker = db.Column(db.String(10), nullable=False)
+    ticker = db.Column(db.String(10), nullable=False, unique=True)
     type = db.Column(db.String, nullable=False)
 
     users = relationship("User",

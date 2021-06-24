@@ -28,7 +28,7 @@ def user(id):
 @user_routes.route('/<int:user_id>/watchlist', methods=['GET'])
 # @login_required
 def watchlist(user_id):
-    tickers = get_relation(user_id, "portfolio")
+    tickers = get_relation(user_id, "watchlist")
     historical_data = get_historical_data(tickers).df
     watchlist_securities = remap_keys(historical_data.to_dict())
 
@@ -45,7 +45,7 @@ def watchlist_edit(user_id, ticker):
         post_relation(user_id, security, ticker, "watchlist")
         return {"message": "Posted watchlist security"}
     elif request.method == "DELETE":
-        delete_relation(user_id, ticker, "watchlist")
+        delete_relation(user_id, security, "watchlist")
         return {"message": "Deleted watchlist security"}
     else:
         return abort(404)
