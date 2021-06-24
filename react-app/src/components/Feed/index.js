@@ -18,12 +18,12 @@ function Feed() {
     const isMarketOpen = useSelector(
       (state) => state.stock.getMarketHours.is_open
     );
-  
+
     // get search for data
     const portfolioData = useSelector((state) => state.stock.portfolio);
     // get user data
     const userId = useSelector((state) => state.session.user.id);
-    
+
     const tickerInfo = useMarketData();
 
     return (
@@ -43,8 +43,8 @@ function Feed() {
                   <div className="min-w-0 flex-1 pt-1.5 space-x-4 self-end">
                     <div>
                       <p className="text-sm text-right text-pink-500">
-                        {ticker.price}
-                      </p> 
+                        {ticker.close}
+                      </p>
                     </div>
                   </div>
                 </div>

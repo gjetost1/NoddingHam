@@ -32,14 +32,16 @@ function useMarketData(tickers) {
                   // We can add more historical data
                   const name = stock;
                   // Grab most current historical price
-                  const price = portfolioData[name][729].close
-                  portfolioInfo.push({name, price})
+                  const close = portfolioData[name][729].close
+                  const volume = portfolioData[name][729].volume
+                  const open = portfolioData[name][729].open
+                  portfolioInfo.push({name, close, volume, open})
               }
               setTickerInfo(portfolioInfo);
-          } 
+          }
       }
   }, [isLoaded, portfolioData])
-  
+
   useEffect(async () => {
     if (isLoaded === false) {
         dispatch(getPortfolio(userId));
@@ -50,13 +52,13 @@ function useMarketData(tickers) {
   const [socketUrl, setSocketUrl] = useState(
     "wss://stream.data.alpaca.markets/v2/iex"
   );
-  
+
   const authAction = {
     action: "auth",
     key: "AKAH50HMXHBHFPJF6G4R",
     secret: "KE0Uoia7scWUpFywwVHcWNYVXK80kxkzDC1W7dDE",
   };
-  
+
   const { sendJsonMessage, lastJsonMessage, readyState, getWebSocket } =
     useWebSocket(socketUrl, {
       onOpen: () => sendJsonMessage(authAction),
@@ -71,7 +73,7 @@ function useMarketData(tickers) {
     [ReadyState.CLOSED]: "Closed",
     [ReadyState.UNINSTANTIATED]: "Uninstantiated",
   }[readyState];
-  
+
   useEffect(() => {
     // console.log(connectionStatus);
     if (connectionStatus === "Open" && (portfolioData !== undefined && isLoaded)) {
@@ -96,7 +98,7 @@ function useMarketData(tickers) {
       });
     }
   }, [lastJsonMessage, isMarketOpen]);
-  
+
   console.log("These are tickers", tickerInfo)
   delete tickerInfo.undefined
   return tickerInfo;

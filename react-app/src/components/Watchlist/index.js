@@ -4,16 +4,17 @@ import { getIndividualSecurity, getWatchlist, addWatchList } from "../../store/s
 import { useParams } from "react-router";
 import Lines from "../Charts/Lines";
 import DeleteFromWatchlist from "./deleteFromWatchlist";
+import useMarketData from "../../websocket/useMarketData";
 
 
 import { ArrowSmDownIcon, ArrowSmUpIcon } from '@heroicons/react/solid'
 
 // websocket fetch here
-const stats = [
-  { name: 'Volume', stat: '71,897', previousStat: '70,946', change: '12%', changeType: 'increase' },
-  { name: 'Open Price', stat: '58.16%', previousStat: '56.14%', change: '2.02%', changeType: 'increase' },
-  { name: 'Close Price', stat: '24.57%', previousStat: '28.62%', change: '4.05%', changeType: 'decrease' },
-]
+// const stats = [
+//   { name: 'Volume', stat: '71,897', previousStat: '70,946', change: '12%', changeType: 'increase' },
+//   { name: 'Open Price', stat: '58.16%', previousStat: '56.14%', change: '2.02%', changeType: 'increase' },
+//   { name: 'Close Price', stat: '24.57%', previousStat: '28.62%', change: '4.05%', changeType: 'decrease' },
+// ]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -27,7 +28,8 @@ export default function Watchlist() {
 
   const [deleted, setDeleted] = useState(false);
 
-
+  const stats = useMarketData()
+  console.log([stats])
 
   useEffect(() => {
       (async function() {
@@ -65,7 +67,7 @@ export default function Watchlist() {
         <h3 className="text-lg leading-6 font-medium text-gray-900">DYNAMIC STOCK</h3>
 
         <dl className="mt-5 grid grid-cols-1 rounded-lg bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-3 md:divide-y-0 md:divide-x">
-        {stats.map((item) => (
+        {[stats].map((item) => (
             <div key={item.name} className="px-4 py-5 sm:p-6">
             <dt className="text-base font-normal text-gray-900">{item.name}</dt>
             <dd className="mt-1 flex justify-between items-baseline md:block lg:flex">
@@ -100,7 +102,7 @@ export default function Watchlist() {
             </div>
         ))}
         </dl>
-        <div style={{height: "500px", width: "1000px"}}>
+        <div>
 
             { data.map((security, i) => {
 
@@ -109,8 +111,10 @@ export default function Watchlist() {
 
               <DeleteFromWatchlist userId={userId} ticker={security[0].id}/>
               </div>
-
-             <Lines data={security[0]} /> </div>})}
+              <div style={{height: "500px", width: "1000px"}}>
+              <Lines data={[security[0]]} />
+              </div>
+              </div>})}
 
 
         </div>
