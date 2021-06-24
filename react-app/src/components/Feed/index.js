@@ -28,20 +28,22 @@ function Feed() {
 
     return (
       tickerInfo && (
-        <div style={{ backgroundColor: 'grey'}}>
-            <h1 className='text-white'>Your Dashboard</h1>
-          <ul className="-mb-8 bg-gray-500">
+        <div className='bg-gray-500'>
+            <div className='m-7'>
+                <h1 className='text-white pt-7 text-center'>Your Dashboard</h1>
+            </div>
+          <ul className="m-4">
             {Object.values(tickerInfo).map((ticker) => (
-              <li className="relative flex space-x-3">
-                <div className="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+              <li className="relative flex space-x-3 my-5 mb-7">
+                <div className="min-w-0 flex-1 pt-1.5 flex justify-start m-1 space-x-4">
                   <Link to={`/stock/${ticker.name}`}>
                     {/* this should be a link */}
-                    <span>Ticker {ticker.name}</span>
+                    <span><span className='text-white'>{ticker.name}</span></span>
                   </Link>
                   <div className="min-w-0 flex-1 pt-1.5 space-x-4 self-end">
                     <div>
                       <p className="text-sm text-right text-pink-500">
-                        price {ticker.price}
+                        {ticker.price}
                       </p> 
                     </div>
                   </div>
