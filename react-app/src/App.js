@@ -54,13 +54,12 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path="/portfolio" exact={true}>
             <WebSocketTest />
+            <Feed />
           </ProtectedRoute>
           <ProtectedRoute path="/" exact={true}>
             <Dashboard />
           </ProtectedRoute>
-          <Route path="/dashboard" exact={true}>
-            <Feed />
-          </Route>
+          <Route path="/dashboard" exact={true}></Route>
         </Switch>
       </BrowserRouter>
     )
