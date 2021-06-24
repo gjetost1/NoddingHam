@@ -12,7 +12,7 @@ import { authenticate } from "./store/session";
 import "./assets/main.css";
 import WebSocketTest from "./WebSocketTest";
 import Portfolio from "./components/Portfolio";
-import Feed from "./components/Feed";
+import Feed from "./components/Feed/index";
 import IndividualStock from "./components/IndividualStock";
 import { dashboard, getMarketClock } from "./store/stock";
 
@@ -53,7 +53,7 @@ function App() {
             <User />
           </ProtectedRoute>
           <ProtectedRoute path="/portfolio" exact={true}>
-            <WebSocketTest />
+            {/* <WebSocketTest /> */}
             <Feed />
           </ProtectedRoute>
           <ProtectedRoute path="/" exact={true}>

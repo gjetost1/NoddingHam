@@ -31,7 +31,7 @@ function useMarketData(tickers) {
   }[readyState];
 
   useEffect(() => {
-    console.log(connectionStatus);
+    // console.log(connectionStatus);
     if (connectionStatus === "Open") {
       sendJsonMessage({
         action: "subscribe",
@@ -42,7 +42,7 @@ function useMarketData(tickers) {
 
   useEffect(() => {
     if (lastJsonMessage) {
-      console.log(lastJsonMessage);
+      // console.log(lastJsonMessage);
       lastJsonMessage.forEach((msg) => {
         const currentTickerInfo = { ...tickerInfo };
         currentTickerInfo[msg.S] = { price: msg.ap, name: msg.S };
@@ -50,7 +50,7 @@ function useMarketData(tickers) {
       });
     }
   }, [lastJsonMessage]);
-  console.log(`here are the tickers`, tickerInfo);
+  // console.log(`here are the tickers`, tickerInfo);
   return tickerInfo;
 }
 

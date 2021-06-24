@@ -95,6 +95,7 @@ export const getPortfolio = (userId) => async (dispatch) => {
   const data = await response.json();
   if (data.errors) return;
   dispatch(getStock(GET_PORTFOLIO, data));
+  return data;
 };
 
 export const addToPortfolio = (userId, ticker) => async (dispatch) => {

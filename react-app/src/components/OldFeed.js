@@ -23,14 +23,12 @@ function Feed() {
   const userId = useSelector((state) => state.session.user.id);
 
   // use effect to get tashbaord
-  useEffect(() => {
+  useEffect(async () => {
     if (isLoaded === false) {
-      (async () => {
         await dispatch(dashboard(userId));
         setIsLoaded(true);
-      })();
-    }
-  }, [isLoaded, tickers]);
+      }
+  }, []);
 
   // handle dashboard data
   if (dashboardData) {
