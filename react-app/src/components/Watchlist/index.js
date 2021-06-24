@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getIndividualSecurity, getWatchlist } from "../../store/stock";
+import { getIndividualSecurity, getWatchlist, addWatchList } from "../../store/stock";
 import { useParams } from "react-router";
 import Lines from "../Charts/Lines";
+import DeleteFromWatchlist from "./deleteFromWatchlist";
+
 
 import { ArrowSmDownIcon, ArrowSmUpIcon } from '@heroicons/react/solid'
 
@@ -23,6 +25,10 @@ export default function Watchlist() {
   const [data, setData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const [deleted, setDeleted] = useState(false);
+
+
+
   useEffect(() => {
       (async function() {
         const newData = await dispatch(getWatchlist(userId))
@@ -35,28 +41,28 @@ export default function Watchlist() {
           nextSecurity["color"] = `hsl(${color}, 70%, 50%)`
           nextSecurity["data"] = []
           points.forEach(point => nextSecurity["data"] = nextSecurity["data"].concat({"x": point.date, "y": point.close}))
-          console.log(nextSecurity["data"])
-          // dataArray = [...dataArray, [nextSecurity]]
-          dataArray = [...dataArray, nextSecurity]
+
+          //multi chart
+          dataArray = [...dataArray, [nextSecurity]]
+          //single chart
+          // dataArray = [...dataArray, nextSecurity]
         }
         setData(dataArray)
         setIsLoaded(true)
       })();
   },[])
 
+  const removeSecurity = e => {
+    let security = e.target.parentNode.parentNode
+    security.setAttribute("hidden", true)
+
+
+  }
   return isLoaded && (
 
     <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">{
-
         <div>
-        <h3 className="text-lg leading-6 font-medium text-gray-900">AAPL</h3>
-
-        <button
-        type="button"
-        className="inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-      >
-        Add To Watchlist
-      </button>
+        <h3 className="text-lg leading-6 font-medium text-gray-900">DYNAMIC STOCK</h3>
 
         <dl className="mt-5 grid grid-cols-1 rounded-lg bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-3 md:divide-y-0 md:divide-x">
         {stats.map((item) => (
@@ -95,8 +101,18 @@ export default function Watchlist() {
         ))}
         </dl>
         <div style={{height: "500px", width: "1000px"}}>
-            {/* { data.map((security, i) => <Lines key={i} data={security} /> )} */}
-            <Lines data={data} />
+
+            { data.map((security, i) => {
+
+             return <div className="watchlist-security" key={i}>
+              <div onClick={removeSecurity}>
+
+              <DeleteFromWatchlist userId={userId} ticker={security[0].id}/>
+              </div>
+
+             <Lines data={security[0]} /> </div>})}
+
+
         </div>
 
     </div>

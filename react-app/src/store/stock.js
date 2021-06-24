@@ -62,7 +62,7 @@ export const getWatchlist = (userId) => async (dispatch) => {
   return data
 };
 
-export const addWatchList = (userId, ticker) => async (dispatch) => {
+export const addToWatchList = (userId, ticker) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}/watchlist/${ticker}`, {
     method: "POST",
     headers: {
