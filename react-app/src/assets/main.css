@@ -1061,6 +1061,15 @@ img {
   --tw-text-opacity: 1;
   color: rgba(49, 46, 129, var(--tw-text-opacity));
 }
+.text-pink-500 {
+  --tw-text-opacity: 1;
+  color: rgba(236, 72, 153, var(--tw-text-opacity));
+}
+
+.focus\:text-gray-900:focus {
+  --tw-text-opacity: 1;
+  color: rgba(17, 24, 39, var(--tw-text-opacity));
+}
 
 .text-pink-500 {
   --tw-text-opacity: 1;
