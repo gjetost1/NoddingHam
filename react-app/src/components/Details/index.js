@@ -37,7 +37,7 @@ export const DailyDetails = ({ title, stats }) => {
     <div className="max-w-7xl mx-auto sm:px-6 lg:px-8" style={{backgroundColor: colors.background_black}}>
       {
         <div>
-          <h3 className="text-lg leading-6 font-medium text-gray-900">
+          <h3 className="text-lg leading-6 font-medium text-white">
             {title}
           </h3>
 

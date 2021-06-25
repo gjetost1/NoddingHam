@@ -59,11 +59,11 @@ function App() {
             {/* <WebSocketTest /> */}
             <div style={{backgroundColor: colors.background_black}}>
               <h1 className="text-center pt-8">Portfolio</h1>
-              <div className="flex flex-row-reverse">
+              {/* <div className="flex flex-row-reverse">
                 <div className="m-36">
                   <Feed />
                 </div>
-              </div>
+              </div> */}
               <Portfolio />
             </div>
           </ProtectedRoute>
@@ -73,7 +73,7 @@ function App() {
           <ProtectedRoute path="/" exact={true}>
             <div>
               <IsMarketOpen />
-              <Dashboard />
+              {/* <Dashboard /> */}
             </div>
           </ProtectedRoute>
           <ProtectedRoute path="/stock/:ticker" exact={true}>

@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import { useSelector } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, Redirect, useHistory } from "react-router-dom";
 import LogoutButton from "./auth/LogoutButton";
 import logo from './NoddingHamCleaner.png'
 import { SearchIcon } from '@heroicons/react/solid'
@@ -15,6 +15,8 @@ const pinkButtonClassName =
 
   const NavBar = () => {
     const history = useHistory();
+    const [search, setSearch] = useState('')
+
 
     const user = useSelector((state) => state.session.user);
     console.log(user);
@@ -74,7 +76,13 @@ const pinkButtonClassName =
                       className="block w-full bg-gray-700 border border-transparent rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-400 focus:outline-none focus:bg-white focus:border-white focus:ring-white focus:text-gray-900 focus:placeholder-gray-500 sm:text-sm"
                       placeholder="Search Stocks"
                       // fix this event handling
-                      onClick={(e)=>history.push(`/stock/${e.target.value}`)}
+
+                      onKeyPress={ e => {
+                        if(e.key==='Enter') {
+                          window.location=`/stock/${e.target.value}`
+                        }
+                      }}
+                      // onChange={e => {setSearch(query: e.target.value)}}
                       type="search"
                       />
                 </div>
