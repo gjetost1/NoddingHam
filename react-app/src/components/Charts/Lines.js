@@ -289,6 +289,21 @@ import { ResponsiveLine } from "@nivo/line";
 
 function Lines({ data }) {
 
+  function halvePoints() {
+    for (let i = 0; i < data.length; i++) {
+      let halvedPoints = [];
+      let points = data[i].data;
+      for (let i = 0; i < points.length; i++) {
+        if (i % 2 !== 0) {
+          halvedPoints.push(points[i])
+        }
+      }
+      data[data] = halvedPoints;
+    }
+  }
+
+  halvePoints();
+
   return (
     <>
     <ResponsiveLine
