@@ -29,7 +29,7 @@ export default function IndividualStock() {
 
       for (let [ticker, points] of Object.entries(newData)) {
         dataObj["id"] = ticker
-        dataObj["color"] = "hsl(183, 70%, 50%)"
+        dataObj["color"] = "hsl(306, 68%, 57%)"
         dataObj["data"] = []
         points.forEach(point => dataObj["data"] = dataObj["data"].concat({ "x": point.date, "y": point.close }))
       }

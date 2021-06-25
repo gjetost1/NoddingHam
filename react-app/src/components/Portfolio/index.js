@@ -93,7 +93,7 @@ export default function Portfolio() {
         let nextSecurity = {};
         nextSecurity["id"] = ticker;
         const color = Math.floor(Math.random() * 255);
-        nextSecurity["color"] = `hsl(${color}, 70%, 50%)`;
+        nextSecurity["color"] = `hsl(306, 68%, 57%)`;
         nextSecurity["data"] = [];
         points.forEach(
           (point) =>
