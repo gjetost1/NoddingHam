@@ -13,7 +13,7 @@ function useMarketData(type = null, tickers = null) {
   const isMarketOpen = useSelector(
     (state) => state.stock.getMarketHours.is_open
   );
-  console.log(`here is the type`, type, `here is the tickers`, tickers);
+
   // get search for data
   const portfolioData = useSelector((state) => state.stock.portfolio);
   const watchlistData = useSelector((state) => state.stock.watchlist);
@@ -27,14 +27,21 @@ function useMarketData(type = null, tickers = null) {
         ? setMarketData(portfolioData)
         : setMarketData(watchlistData);
     }
-  });
+  }, [isLoaded, marketData]);
 
   // handle ticker info
-  useEffect(() => {
-    if (tickers) {
-      setMarketData(tickers.reduce((acc, curr) => ((acc[curr] = ""), acc), {}));
-    }
-  });
+  useEffect(
+    () => {
+      if (tickers) {
+        setMarketData(
+          tickers.reduce((acc, curr) => ((acc[curr] = ""), acc), {})
+        );
+      }
+    },
+    tickers,
+    isLoaded,
+    marketData
+  );
 
   useEffect(() => {
     console.log(`here is market data`, marketData);
@@ -57,7 +64,7 @@ function useMarketData(type = null, tickers = null) {
         setTickerInfo(marketDataInfo);
       }
     }
-  }, [isLoaded, marketData]);
+  }, [isLoaded, isMarketOpen]);
 
   useEffect(async () => {
     if (isLoaded === false) {

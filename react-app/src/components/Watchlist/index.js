@@ -12,7 +12,7 @@ import useMarketData from "../../websocket/useMarketData";
 
 import { ArrowSmDownIcon, ArrowSmUpIcon } from "@heroicons/react/solid";
 import { DailyDetails } from "../Details";
-import {colors} from "../Portfolio/index";
+import { colors } from "../Portfolio/index";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -56,7 +56,7 @@ export default function Watchlist() {
       setData(dataArray);
       setIsLoaded(true);
     })();
-  }, []);
+  }, [data, isLoaded]);
 
   const removeSecurity = (e) => {
     let security = e.target.parentNode.parentNode;
@@ -64,13 +64,16 @@ export default function Watchlist() {
   };
   return (
     isLoaded && (
-      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8" style={{backgroundColor: colors.background_black}}>
+      <div
+        className="max-w-7xl mx-auto sm:px-6 lg:px-8"
+        style={{ backgroundColor: colors.background_black }}
+      >
         {
           <div>
             <DailyDetails title="Watchlist" stats={stats} />
             <div>
               {data.map((security, i) => {
-                console.log(security,"sec")
+                console.log(security, "sec");
                 return (
                   <div className="watchlist-security" key={i}>
                     <div onClick={removeSecurity}>
