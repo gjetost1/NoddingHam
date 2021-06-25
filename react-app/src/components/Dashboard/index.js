@@ -6,6 +6,7 @@ import Lines from "../Charts/Lines";
 import HistoricalDetails from "../Details/HistoricalDetails";
 import { DailyDetails } from "../Details";
 import useMarketData from "../../websocket/useMarketData";
+import {colors} from "../Portfolio/index";
 
 const remapData = (newData) => {
   let dataArray = [];
@@ -48,7 +49,7 @@ const Dashboard = () => {
 
   return (
     isLoaded && (
-      <div>
+      <div style={{backgroundColor: colors.background_black}}>
         <DailyDetails stats={stats} />
         <div style={{ height: "500px", width: "1000px" }}>
           <Lines data={data} />

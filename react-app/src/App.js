@@ -16,6 +16,7 @@ import IndividualStock from "./components/IndividualStock";
 import Watchlist from "./components/Watchlist";
 import Feed from "./components/Feed/index";
 import { dashboard, getMarketClock } from "./store/stock";
+import {colors} from "../src/components/Portfolio/index";
 import IsMarketOpen from "./components/Notifications/IsMarketOpen";
 
 function App() {
@@ -56,7 +57,7 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path="/portfolio" exact={true}>
             {/* <WebSocketTest /> */}
-            <div>
+            <div style={{backgroundColor: colors.background_black}}>
               <h1 className="text-center pt-8">Portfolio</h1>
               <div className="flex flex-row-reverse">
                 <div className="m-36">

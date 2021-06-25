@@ -8,6 +8,7 @@ import PostPortfolio from '../Portfolio/postToPortfolio';
 import HistoricalDetails from "../Details/HistoricalDetails";
 import IndividualDailyDetails from "../Details/IndividualDailyDetails";
 import useMarketData from "../../websocket/useMarketData";
+import {colors} from "../Portfolio/index";
 
 const remapData = (newData) => {
   let dataObj = {}
@@ -43,7 +44,7 @@ export default function IndividualStock() {
 
   return isLoaded && (
     <div>
-      <div>
+      <div style={{backgroundColor: colors.background_black}}>
         {data.map((security, i) => {
           return <div key={i}>
             <IndividualDailyDetails stats={"put websocket stats here"} />

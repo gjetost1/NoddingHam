@@ -4,6 +4,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import LogoutButton from "./auth/LogoutButton";
 import logo from './NoddingHamCleaner.png'
 import { SearchIcon } from '@heroicons/react/solid'
+import {colors} from "./Portfolio/index";
 
 //handle navbar items
 
@@ -19,7 +20,7 @@ const pinkButtonClassName =
     console.log(user);
     return (
 
-      <div className="bg-black">
+      <div style={{backgroundColor: colors.background_black}}>
       <div class="logo-container"> <img src={logo} class="logo" /></div>
 
 

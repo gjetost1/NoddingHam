@@ -1,6 +1,7 @@
 import React from "react";
 import { ArrowSmDownIcon, ArrowSmUpIcon } from "@heroicons/react/solid";
 import { useSelector } from "react-redux";
+import {colors} from "../Portfolio/index"
 
 const stats = [
   {
@@ -33,7 +34,7 @@ function classNames(...classes) {
 export const DailyDetails = ({ title, stats }) => {
   const isMarketOpen = useSelector((state) => state.stock.getMarketHours.is_open)
   return (
-    <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto sm:px-6 lg:px-8" style={{backgroundColor: colors.background_black}}>
       {
         <div>
           <h3 className="text-lg leading-6 font-medium text-gray-900">

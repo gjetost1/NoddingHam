@@ -72,6 +72,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+export const colors = {  "background_black": "#0A0B0C",
+                  "primary_white": "#ffffea",
+                  "secondary_gray": "#1d2124",
+                  "primary_pink": "#DC45CE",
+                  "secondary_green": "#00c705",
+                  "secondary_red": "#d35721"
+};
+
 export default function Portfolio() {
   //const { userId } = useParams();
   const userId = useSelector((state) => state.session.user.id);
@@ -120,10 +128,10 @@ export default function Portfolio() {
   return (
     isLoaded &&
     stats && (
-      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8" style={{backgroundColor: colors.background_black}}>
         <div>
           <DailyDetails title="Portfolio" stats={stats} />
-          <div>
+          <div style={{backgroundColor: colors.background_black}}>
             {data.map((security, i) => {
               return (
                 <div className="watchlist-security" key={i}>
@@ -133,7 +141,7 @@ export default function Portfolio() {
                       ticker={security[0].id}
                     />
                   </div>
-                  <div style={{ height: "500px", width: "1000px" }}>
+                  <div style={{ height: "500px", width: "1000px" } }>
                     <Lines data={[security[0]]} />
                   </div>
                 </div>
