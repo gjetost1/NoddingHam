@@ -17,6 +17,7 @@ import Watchlist from "./components/Watchlist";
 import Feed from "./components/Feed/index";
 import { dashboard, getMarketClock } from "./store/stock";
 import {colors} from "../src/components/Portfolio/index";
+import IsMarketOpen from "./components/Notifications/IsMarketOpen";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -70,7 +71,10 @@ function App() {
             <Watchlist />
           </ProtectedRoute>
           <ProtectedRoute path="/" exact={true}>
-            <Dashboard />
+            <div>
+              <IsMarketOpen />
+              <Dashboard />
+            </div>
           </ProtectedRoute>
           <ProtectedRoute path="/stock/:ticker" exact={true}>
             <IndividualStock />

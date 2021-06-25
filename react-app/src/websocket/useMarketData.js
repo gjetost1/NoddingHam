@@ -13,7 +13,7 @@ function useMarketData(type = null, tickers = null) {
   const isMarketOpen = useSelector(
     (state) => state.stock.getMarketHours.is_open
   );
-
+  console.log(`here is the type`, type, `here is the tickers`, tickers);
   // get search for data
   const portfolioData = useSelector((state) => state.stock.portfolio);
   const watchlistData = useSelector((state) => state.stock.watchlist);
@@ -30,12 +30,15 @@ function useMarketData(type = null, tickers = null) {
   });
 
   // handle ticker info
-  if (tickers) {
-    setMarketData(tickers.reduce((acc, curr) => ((acc[curr] = ""), acc), {}));
-  }
+  useEffect(() => {
+    if (tickers) {
+      setMarketData(tickers.reduce((acc, curr) => ((acc[curr] = ""), acc), {}));
+    }
+  });
 
   useEffect(() => {
-    if (marketData) {
+    console.log(`here is market data`, marketData);
+    if (marketData && tickers === null) {
       if (!isMarketOpen) {
         let marketDataInfo = [];
         // Loop through market historical data
@@ -43,9 +46,12 @@ function useMarketData(type = null, tickers = null) {
           // We can add more historical data
           const name = stock;
           // Grab most current historical price
-          const close = marketData[name][729].close;
-          const volume = marketData[name][729].volume;
-          const open = marketData[name][729].open;
+          const close =
+            marketData[name][729].close || marketData[name][728].close;
+          const volume =
+            marketData[name][729].volume || marketData[name][728].close;
+          const open =
+            marketData[name][729].open || marketData[name][728].close;
           marketDataInfo.push({ name, close, volume, open });
         }
         setTickerInfo(marketDataInfo);
@@ -109,7 +115,7 @@ function useMarketData(type = null, tickers = null) {
     }
   }, [lastJsonMessage, isMarketOpen]);
 
-  console.log("These are tickers", tickerInfo);
+  console.log("These are tickers", JSON.stringify(tickerInfo));
   delete tickerInfo.undefined;
   return tickerInfo;
 }
