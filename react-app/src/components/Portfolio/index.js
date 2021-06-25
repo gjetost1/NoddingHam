@@ -118,7 +118,8 @@ export default function Portfolio() {
     security.setAttribute("hidden", true);
   };
   return (
-    isLoaded && (
+    isLoaded &&
+    stats && (
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div>
           <DailyDetails title="Portfolio" stats={stats} />

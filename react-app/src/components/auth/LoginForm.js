@@ -30,7 +30,7 @@ const LoginForm = () => {
   };
 
   if (user) {
-    return <Redirect to="/portfolio" />;
+    return <Redirect to="/" />;
   }
 
   return (
