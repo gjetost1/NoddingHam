@@ -20,7 +20,7 @@ function useMarketData(tickers) {
 
   if (tickers) {
     portfolioData = tickers.reduce((acc,curr) => (acc[curr]='',acc),{});
-    console.log("Portfolio Data", portfolioData)
+    // console.log("Portfolio Data", portfolioData)
   }
 
   useEffect(() => {
@@ -77,7 +77,7 @@ function useMarketData(tickers) {
   useEffect(() => {
     // console.log(connectionStatus);
     if (connectionStatus === "Open" && (portfolioData !== undefined && isLoaded)) {
-      console.log("This is", Object.keys(portfolioData))
+      // console.log("This is", Object.keys(portfolioData))
       sendJsonMessage({
         action: "subscribe",
         quotes: Object.keys(portfolioData),
