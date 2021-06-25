@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPortfolio, getWatchlist } from "../store/stock";
 
 //takes in tickers
-function useMarketData(type, tickers = null) {
+function useMarketData(type = null, tickers = null) {
   const [tickerInfo, setTickerInfo] = useState({});
   const [marketData, setMarketData] = useState(null);
   const dispatch = useDispatch();
