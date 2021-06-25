@@ -37,7 +37,7 @@ export default function Watchlist() {
         let nextSecurity = {};
         nextSecurity["id"] = ticker;
         const color = Math.floor(Math.random() * 255);
-        nextSecurity["color"] = `hsl(${color}, 70%, 50%)`;
+        nextSecurity["color"] = `hsl(306, 68%, 57%)`;
         nextSecurity["data"] = [];
         points.forEach(
           (point) =>
@@ -69,6 +69,7 @@ export default function Watchlist() {
             <DailyDetails title="Watchlist" stats={stats} />
             <div>
               {data.map((security, i) => {
+                console.log(security,"sec")
                 return (
                   <div className="watchlist-security" key={i}>
                     <div onClick={removeSecurity}>

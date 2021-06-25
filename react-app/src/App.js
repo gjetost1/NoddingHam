@@ -58,9 +58,9 @@ function App() {
             <div>
               <h1 className="text-center pt-8">Portfolio</h1>
               <div className="flex flex-row-reverse">
-                {/* <div className="m-36">
+                <div className="m-36">
                   <Feed />
-                </div> */}
+                </div>
               </div>
               <Portfolio />
             </div>
