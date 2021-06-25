@@ -92,7 +92,7 @@ function useMarketData(tickers) {
         if (msg.S !== 0) {
         const currentTickerInfo = { ...tickerInfo };
         console.log(msg)
-        currentTickerInfo[msg.S] = { price: msg.ap, name: msg.S };
+        currentTickerInfo[msg.S] = { close: msg.ap, name: msg.S };
         setTickerInfo(currentTickerInfo);
         }
       });

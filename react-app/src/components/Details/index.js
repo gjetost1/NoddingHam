@@ -31,6 +31,7 @@ function classNames(...classes) {
 }
 
 export const DailyDetails = ({ title, stats }) => {
+  const isMarketOpen = useSelector((state) => state.stock.getMarketHours.is_open)
   return (
     <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
       {
@@ -47,7 +48,7 @@ export const DailyDetails = ({ title, stats }) => {
                 </dt>
                 <dd className="mt-1 flex justify-between items-baseline md:block lg:flex">
                   <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                    Open {item.open}
+                    {isMarketOpen ? `Current Price` : `Open ${item.open}`}
                     <span className="ml-2 text-sm font-medium text-gray-500">
                       from {item.close} Close
                     </span>
