@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
-import { useDispatch, useSelector } from 'react-redux';
-import { getPortfolio } from '../store/stock';
+import { useDispatch, useSelector } from "react-redux";
+import { getPortfolio } from "../store/stock";
 
 //takes in tickers
 function useMarketData(tickers) {
@@ -19,33 +19,33 @@ function useMarketData(tickers) {
   const userId = useSelector((state) => state.session.user.id);
 
   if (tickers) {
-    portfolioData = tickers.reduce((acc,curr) => (acc[curr]='',acc),{});
+    portfolioData = tickers.reduce((acc, curr) => ((acc[curr] = ""), acc), {});
     // console.log("Portfolio Data", portfolioData)
   }
 
   useEffect(() => {
-      if (portfolioData !== undefined) {
-          if (!isMarketOpen) {
-              let portfolioInfo = []
-              // Loop through market historical data
-              for (const stock in portfolioData) {
-                  // We can add more historical data
-                  const name = stock;
-                  // Grab most current historical price
-                  const close = portfolioData[name][729].close
-                  const volume = portfolioData[name][729].volume
-                  const open = portfolioData[name][729].open
-                  portfolioInfo.push({name, close, volume, open})
-              }
-              setTickerInfo(portfolioInfo);
-          }
+    if (portfolioData !== undefined) {
+      if (!isMarketOpen) {
+        let portfolioInfo = [];
+        // Loop through market historical data
+        for (const stock in portfolioData) {
+          // We can add more historical data
+          const name = stock;
+          // Grab most current historical price
+          const close = portfolioData[name][729].close;
+          const volume = portfolioData[name][729].volume;
+          const open = portfolioData[name][729].open;
+          portfolioInfo.push({ name, close, volume, open });
+        }
+        setTickerInfo(portfolioInfo);
       }
-  }, [isLoaded, portfolioData])
+    }
+  }, [isLoaded, portfolioData]);
 
   useEffect(async () => {
     if (isLoaded === false) {
-        dispatch(getPortfolio(userId));
-        setIsLoaded(true);
+      dispatch(getPortfolio(userId));
+      setIsLoaded(true);
     }
   }, [isLoaded, dispatch]);
 
@@ -55,8 +55,8 @@ function useMarketData(tickers) {
 
   const authAction = {
     action: "auth",
-    key: "AKAH50HMXHBHFPJF6G4R",
-    secret: "KE0Uoia7scWUpFywwVHcWNYVXK80kxkzDC1W7dDE",
+    key: process.env.REACT_APP_ALPACA_KEY,
+    secret: process.env.REACT_APP_ALPACA_SECRET,
   };
 
   const { sendJsonMessage, lastJsonMessage, readyState, getWebSocket } =
@@ -64,7 +64,6 @@ function useMarketData(tickers) {
       onOpen: () => sendJsonMessage(authAction),
       share: true,
     });
-
 
   const connectionStatus = {
     [ReadyState.CONNECTING]: "Connecting",
@@ -76,7 +75,11 @@ function useMarketData(tickers) {
 
   useEffect(() => {
     // console.log(connectionStatus);
-    if (connectionStatus === "Open" && (portfolioData !== undefined && isLoaded)) {
+    if (
+      connectionStatus === "Open" &&
+      portfolioData !== undefined &&
+      isLoaded
+    ) {
       // console.log("This is", Object.keys(portfolioData))
       sendJsonMessage({
         action: "subscribe",
@@ -86,21 +89,21 @@ function useMarketData(tickers) {
   }, [connectionStatus, isMarketOpen, portfolioData]);
 
   useEffect(() => {
-    if (lastJsonMessage && (isMarketOpen && portfolioData !== undefined)) {
+    if (lastJsonMessage && isMarketOpen && portfolioData !== undefined) {
       // console.log(lastJsonMessage);
       lastJsonMessage.forEach((msg) => {
         if (msg.S !== 0) {
-        const currentTickerInfo = { ...tickerInfo };
-        console.log(msg)
-        currentTickerInfo[msg.S] = { close: msg.ap, name: msg.S };
-        setTickerInfo(currentTickerInfo);
+          const currentTickerInfo = { ...tickerInfo };
+          console.log(msg);
+          currentTickerInfo[msg.S] = { close: msg.ap, name: msg.S };
+          setTickerInfo(currentTickerInfo);
         }
       });
     }
   }, [lastJsonMessage, isMarketOpen]);
 
-  console.log("These are tickers", tickerInfo)
-  delete tickerInfo.undefined
+  console.log("These are tickers", tickerInfo);
+  delete tickerInfo.undefined;
   return tickerInfo;
 }
 
