@@ -4,6 +4,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import LogoutButton from "./auth/LogoutButton";
 import logo from './NoddingHamCleaner.png'
 import { SearchIcon } from '@heroicons/react/solid'
+
 //handle navbar items
 
 const pinkButtonClassName =
@@ -39,6 +40,7 @@ const pinkButtonClassName =
               >
                 Home
               </NavLink>
+
               <NavLink
                 to="/portfolio"
                 exact={true}
@@ -58,25 +60,13 @@ const pinkButtonClassName =
 
             </li>
             <li>
-
+          {user && (
             <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:divide-y lg:divide-gray-700 lg:px-8">
-            <div className="relative h-16 flex justify-between">
-              <div className="relative z-10 px-2 flex lg:px-0">
-                <div className="flex-shrink-0 flex items-center">
-                  <img
-                    className="block h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                    alt="Workflow"
-                    />
-                </div>
-              </div>
-              <div className="relative z-0 flex-1 px-2 flex items-center justify-end sm:absolute sm:inset-0">
-                <div className="w-full sm:max-w-xs">
+                <div className="flex-shrink-0 flex items-end">
                   <label htmlFor="search" className="sr-only">
                     Search
                   </label>
                   <div className="relative">
-
                     <input
                       id="search"
                       name="search"
@@ -86,11 +76,14 @@ const pinkButtonClassName =
                       onClick={(e)=>history.push(`/stock/${e.target.value}`)}
                       type="search"
                       />
-                  </div>
                 </div>
               </div>
-              </div>
-              </div>
+            </div>
+          )}
+
+
+
+
               </li>
             {!user && (
               <li>
