@@ -5,11 +5,10 @@ import { useParams } from "react-router";
 import Lines from "../Charts/Lines";
 import PostWatchlist from "../Watchlist/postToWatchlist"
 import PostPortfolio from '../Portfolio/postToPortfolio';
-import { DailyDetails, HistoricalDetails } from "../Details"
-// import { ArrowSmDownIcon, ArrowSmUpIcon } from '@heroicons/react/solid'
+import HistoricalDetails from "../Details/HistoricalDetails";
+import IndividualDailyDetails from "../Details/IndividualDailyDetails";
+import useMarketData from "../../websocket/useMarketData";
 
-
-//backend query here
 
 
 
@@ -19,6 +18,9 @@ export default function IndividualStock() {
   const [data, setData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
   const userId = useSelector(state => state.session.user.id)
+
+  let test = useMarketData(["AAPL"]);
+  console.log(test)
 
   useEffect(() => {
     (async function () {
@@ -41,7 +43,7 @@ export default function IndividualStock() {
       <div>
         {data.map((security, i) => {
           return <div key={i}>
-            <DailyDetails stats={"put websocket stats here"} />
+            <IndividualDailyDetails stats={"put websocket stats here"} />
             <PostWatchlist ticker={security.id} userId={userId} />
             <PostPortfolio ticker={security.id} userId={userId} />
             <div style={{ height: "500px", width: "1000px" }}>
