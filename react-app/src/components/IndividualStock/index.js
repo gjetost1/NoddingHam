@@ -9,8 +9,18 @@ import HistoricalDetails from "../Details/HistoricalDetails";
 import IndividualDailyDetails from "../Details/IndividualDailyDetails";
 import useMarketData from "../../websocket/useMarketData";
 
+const remapData = (newData) => {
+  let dataObj = {}
 
+  for (let [ticker, points] of Object.entries(newData)) {
+    dataObj["id"] = ticker
+    dataObj["color"] = "hsl(183, 70%, 50%)"
+    dataObj["data"] = []
+    points.forEach(point => dataObj["data"] = dataObj["data"].concat({ "x": point.date, "y": point.close }))
+  }
 
+  return dataObj
+}
 
 export default function IndividualStock() {
   const { ticker } = useParams()
@@ -25,15 +35,8 @@ export default function IndividualStock() {
   useEffect(() => {
     (async function () {
       const newData = await dispatch(getIndividualSecurity(ticker))
-      let dataObj = {}
-
-      for (let [ticker, points] of Object.entries(newData)) {
-        dataObj["id"] = ticker
-        dataObj["color"] = "hsl(183, 70%, 50%)"
-        dataObj["data"] = []
-        points.forEach(point => dataObj["data"] = dataObj["data"].concat({ "x": point.date, "y": point.close }))
-      }
-      setData([dataObj])
+      const remappedData = remapData(newData);
+      setData([remappedData])
       setIsLoaded(true)
     })();
   }, [])

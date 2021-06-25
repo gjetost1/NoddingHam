@@ -38,6 +38,7 @@ export const dashboard = () => async (dispatch) => {
   const data = await response.json();
   if (data.errors) return;
   dispatch(getStock(GET_DASHBOARD, data));
+  return data
 };
 
 export const getIndividualSecurity = (ticker) => async (dispatch) => {
@@ -141,7 +142,6 @@ export default function reducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case GET_DASHBOARD:
-      console.log(action.payload);
       newState = Object.assign({}, state);
       newState.dashboard = action.payload;
       return newState;
