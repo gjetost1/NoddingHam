@@ -12,6 +12,7 @@ import useMarketData from "../../websocket/useMarketData";
 
 import { ArrowSmDownIcon, ArrowSmUpIcon } from "@heroicons/react/solid";
 import { DailyDetails } from "../Details";
+import {colors} from "../Portfolio/index";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -25,7 +26,7 @@ export default function Watchlist() {
 
   const [deleted, setDeleted] = useState(false);
 
-  const stats = useMarketData();
+  const stats = useMarketData("watchlist");
   // console.log([stats])
 
   useEffect(() => {
@@ -63,7 +64,7 @@ export default function Watchlist() {
   };
   return (
     isLoaded && (
-      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8" style={{backgroundColor: colors.background_black}}>
         {
           <div>
             <DailyDetails title="Watchlist" stats={stats} />
