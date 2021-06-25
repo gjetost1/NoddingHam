@@ -78,10 +78,14 @@ function useMarketData(type = null, tickers = null) {
   };
 
   const { sendJsonMessage, lastJsonMessage, readyState, getWebSocket } =
-    useWebSocket(socketUrl, {
-      onOpen: () => sendJsonMessage(authAction),
-      share: true,
-    });
+    useWebSocket(
+      socketUrl,
+      {
+        onOpen: () => sendJsonMessage(authAction),
+        share: true,
+      },
+      false
+    );
 
   const connectionStatus = {
     [ReadyState.CONNECTING]: "Connecting",
@@ -115,7 +119,7 @@ function useMarketData(type = null, tickers = null) {
     }
   }, [lastJsonMessage, isMarketOpen]);
 
-  console.log("These are tickers", JSON.stringify(tickerInfo));
+  // console.log("These are tickers", JSON.stringify(tickerInfo));
   delete tickerInfo.undefined;
   return tickerInfo;
 }

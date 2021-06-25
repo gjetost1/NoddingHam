@@ -32,7 +32,7 @@ const pinkButtonClassName =
 
           <ul className="flex flex-row justify-between">
 
-            <li>
+            {user && (<li>
 
               <NavLink
                 to="/"
@@ -61,7 +61,7 @@ const pinkButtonClassName =
                   Watchlist
                 </NavLink>
 
-            </li>
+            </li>)}
             <li>
           {user && (
             <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:divide-y lg:divide-gray-700 lg:px-8">
