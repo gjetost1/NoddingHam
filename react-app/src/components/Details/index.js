@@ -50,11 +50,11 @@ export const DailyDetails = ({ title, stats }) => {
                   <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
                     {isMarketOpen ? `Current Price` : `Open ${item.open}`}
                     <span className="ml-2 text-sm font-medium text-gray-500">
-                      from {item.close} Close
+                      {isMarketOpen ? `is ${item.close}` : `from ${item.close} Close`}
                     </span>
                   </div>
 
-                  <div
+                  {!isMarketOpen && <div
                     className={classNames(
                       item.open < item.close
                         ? "bg-green-100 text-green-800"
@@ -81,7 +81,7 @@ export const DailyDetails = ({ title, stats }) => {
                       by
                     </span>
                     {item.change}
-                  </div>
+                  </div>}
                 </dd>
               </div>
             ))}
