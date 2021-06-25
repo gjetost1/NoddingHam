@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import { useDispatch, useSelector } from "react-redux";
-import { getPortfolio } from "../store/stock";
+import { getPortfolio, getWatchlist } from "../store/stock";
 
 //takes in tickers
-function useMarketData(tickers) {
+function useMarketData(type, tickers = null) {
   const [tickerInfo, setTickerInfo] = useState({});
+  const [marketData, setMarketData] = useState(null);
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   const [historicalData, setHistoricalData] = useState(null);
@@ -14,37 +15,48 @@ function useMarketData(tickers) {
   );
 
   // get search for data
-  let portfolioData = useSelector((state) => state.stock.portfolio);
+  const portfolioData = useSelector((state) => state.stock.portfolio);
+  const watchlistData = useSelector((state) => state.stock.watchlist);
+
   // get user data
   const userId = useSelector((state) => state.session.user.id);
 
+  useEffect(() => {
+    if (isLoaded) {
+      type === "portfolio"
+        ? setMarketData(portfolioData)
+        : setMarketData(watchlistData);
+    }
+  });
+
+  // handle ticker info
   if (tickers) {
-    portfolioData = tickers.reduce((acc, curr) => ((acc[curr] = ""), acc), {});
-    // console.log("Portfolio Data", portfolioData)
+    setMarketData(tickers.reduce((acc, curr) => ((acc[curr] = ""), acc), {}));
   }
 
   useEffect(() => {
-    if (portfolioData !== undefined) {
+    if (marketData) {
       if (!isMarketOpen) {
-        let portfolioInfo = [];
+        let marketDataInfo = [];
         // Loop through market historical data
-        for (const stock in portfolioData) {
+        for (const stock in marketData) {
           // We can add more historical data
           const name = stock;
           // Grab most current historical price
-          const close = portfolioData[name][729].close;
-          const volume = portfolioData[name][729].volume;
-          const open = portfolioData[name][729].open;
-          portfolioInfo.push({ name, close, volume, open });
+          const close = marketData[name][729].close;
+          const volume = marketData[name][729].volume;
+          const open = marketData[name][729].open;
+          marketDataInfo.push({ name, close, volume, open });
         }
-        setTickerInfo(portfolioInfo);
+        setTickerInfo(marketDataInfo);
       }
     }
-  }, [isLoaded, portfolioData]);
+  }, [isLoaded, marketData]);
 
   useEffect(async () => {
     if (isLoaded === false) {
-      dispatch(getPortfolio(userId));
+      if (type === "portfolio") dispatch(getPortfolio(userId));
+      if (type === "watchlist") dispatch(getWatchlist(userId));
       setIsLoaded(true);
     }
   }, [isLoaded, dispatch]);
@@ -74,22 +86,17 @@ function useMarketData(tickers) {
   }[readyState];
 
   useEffect(() => {
-    // console.log(connectionStatus);
-    if (
-      connectionStatus === "Open" &&
-      portfolioData !== undefined &&
-      isLoaded
-    ) {
-      // console.log("This is", Object.keys(portfolioData))
+    if (connectionStatus === "Open" && marketData && isLoaded) {
+      // console.log("This is", Object.keys(marketData))
       sendJsonMessage({
         action: "subscribe",
-        quotes: Object.keys(portfolioData),
+        quotes: Object.keys(marketData),
       });
     }
-  }, [connectionStatus, isMarketOpen, portfolioData]);
+  }, [connectionStatus, isMarketOpen, marketData]);
 
   useEffect(() => {
-    if (lastJsonMessage && isMarketOpen && portfolioData !== undefined) {
+    if (lastJsonMessage && isMarketOpen && marketData) {
       // console.log(lastJsonMessage);
       lastJsonMessage.forEach((msg) => {
         if (msg.S !== 0) {
