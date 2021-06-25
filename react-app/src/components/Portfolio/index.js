@@ -81,7 +81,7 @@ export default function Portfolio() {
 
   const [deleted, setDeleted] = useState(false);
 
-  const stats = useMarketData();
+  const stats = useMarketData("portfolio");
   // console.log([stats])
 
   useEffect(() => {

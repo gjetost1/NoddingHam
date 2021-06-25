@@ -25,7 +25,7 @@ export default function Watchlist() {
 
   const [deleted, setDeleted] = useState(false);
 
-  const stats = useMarketData();
+  const stats = useMarketData("watchlist");
   // console.log([stats])
 
   useEffect(() => {
