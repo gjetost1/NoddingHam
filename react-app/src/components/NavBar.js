@@ -23,7 +23,7 @@ const pinkButtonClassName =
     return (
 
       <div style={{backgroundColor: colors.background_black}}>
-      <div class="logo-container"> <img src={logo} class="logo" /></div>
+      <div className="logo-container" style={{height:"5vh", display:"flex", justifyContent:"center", alignItems:"center"}}> <img src={logo} style={{margin:"auto", width:"10vw", display:"flex", justifyContent:"center"}} /></div>
 
 
 

@@ -13,6 +13,7 @@ import useMarketData from "../../websocket/useMarketData";
 import { ArrowSmDownIcon, ArrowSmUpIcon } from "@heroicons/react/solid";
 import { DailyDetails } from "../Details";
 import {colors} from "../Portfolio/index";
+import Loader from "../Loader";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -62,6 +63,9 @@ export default function Watchlist() {
     let security = e.target.parentNode.parentNode;
     security.setAttribute("hidden", true);
   };
+  if (!isLoaded || !stats || !data) {
+    return <Loader/>
+  }
   return (
     isLoaded && (
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-8" style={{backgroundColor: colors.background_black}}>

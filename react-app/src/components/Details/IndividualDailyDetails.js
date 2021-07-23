@@ -35,7 +35,7 @@ export default function IndividualDailyDetails() {
     return (
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8" style={{backgroundColor: colors.background_black}}>
             <div>
-                <h3 className="text-lg leading-6 font-medium text-gray-900">AAPL</h3>
+                <h3 className="text-lg leading-6 font-medium text-white">Stats</h3>
                 <dl className="mt-5 grid grid-cols-1 rounded-lg bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-3 md:divide-y-0 md:divide-x">
                     {stats.map((item) => (
                         <div key={item.name} className="px-4 py-5 sm:p-6">

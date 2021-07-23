@@ -60,6 +60,7 @@ import PostPortfolio from "./postToPortfolio";
 
 import { ArrowSmDownIcon, ArrowSmUpIcon } from "@heroicons/react/solid";
 import { DailyDetails } from "../Details";
+import Loader from "../../components/Loader"
 
 // websocket fetch here
 // const stats = [
@@ -125,6 +126,11 @@ export default function Portfolio() {
     let security = e.target.parentNode.parentNode;
     security.setAttribute("hidden", true);
   };
+  //loader
+  if (!isLoaded || !stats || !data) {
+    return <Loader/>
+  }
+
   return (
     isLoaded &&
     stats && (
