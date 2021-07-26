@@ -13,3 +13,8 @@
  justify-content: center;
 
 }
+
+@font-face {
+    font-family: Reglisse;
+    src: url(../src/fonts/Reglisse_Fill.otf) format("opentype")
+  }
