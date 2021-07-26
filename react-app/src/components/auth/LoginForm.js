@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { login } from "../../store/session";
 
 const LoginForm = () => {
@@ -9,9 +9,7 @@ const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  console.log(email);
-  console.log(password);
+  const history=useHistory()
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -28,6 +26,12 @@ const LoginForm = () => {
   const updatePassword = (e) => {
     setPassword(e.target.value);
   };
+
+  const demoLogin = async(e) => {
+    e.preventDefault()
+    await dispatch(login("demo@aa.io", "password"))
+    history.push("/")
+  }
 
   if (user) {
     return <Redirect to="/" />;
@@ -95,8 +99,17 @@ const LoginForm = () => {
               >
                 Sign in
               </button>
+
             </div>
           </form>
+          <button
+                type="submit"
+                style={{marginTop:"3vh"}}
+                onClick={demoLogin}
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-pink-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
+              >
+                Demo User
+              </button>
         </div>
       </div>
     </div>
