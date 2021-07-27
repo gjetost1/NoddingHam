@@ -121,14 +121,14 @@ function AlpacaStream() {
   //useeffect
 
   useEffect(() => {
-    console.log(connectionStatus);
+    // console.log(connectionStatus);
     if (connectionStatus === "Open") {
       //   sendJsonMessage({
       //     action: "subscribe",
       //     quotes: ["AMD", "CLDR"],
       //     bars: ["AAPL", "VOO"],
       //   });
-      console.log(`hello world`);
+      // console.log(`hello world`);
     }
   }, [connectionStatus]);
 
