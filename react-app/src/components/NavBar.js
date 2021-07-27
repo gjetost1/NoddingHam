@@ -39,7 +39,7 @@ const pinkButtonClassName =
 
 
     const user = useSelector((state) => state.session.user);
-    console.log(user);
+    // console.log(user);
     return (
 
       <div style={{backgroundColor: colors.background_black}}>

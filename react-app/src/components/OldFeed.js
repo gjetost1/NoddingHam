@@ -42,7 +42,7 @@
 //   // this will should only load if the market is open
 //   const tickerInfo = useMarketData(["AMD", "CLDR", "GLD", "AAPL", "MSFT"]);
 
-//   console.log(tickerInfo);
+//   (tickerInfo);
 //   return (
 //     isLoaded &&
 //     tickers.length && (

@@ -13,7 +13,7 @@ function useMarketData(type = null, tickers = null) {
   const isMarketOpen = useSelector(
     (state) => state.stock.getMarketHours.is_open
   );
-  console.log(`here is the type`, type, `here is the tickers`, tickers);
+  // console.log(`here is the type`, type, `here is the tickers`, tickers);
   // get search for data
   const portfolioData = useSelector((state) => state.stock.portfolio);
   const watchlistData = useSelector((state) => state.stock.watchlist);
@@ -111,7 +111,7 @@ function useMarketData(type = null, tickers = null) {
       lastJsonMessage.forEach((msg) => {
         if (msg.S !== 0) {
           const currentTickerInfo = { ...tickerInfo };
-          console.log(msg);
+          // console.log(msg);
           currentTickerInfo[msg.S] = { close: msg.ap, name: msg.S };
           setTickerInfo(currentTickerInfo);
         }

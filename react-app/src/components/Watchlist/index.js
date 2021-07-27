@@ -74,7 +74,7 @@ export default function Watchlist() {
             <DailyDetails title="Watchlist" stats={stats} />
             <div>
               {data.map((security, i) => {
-                console.log(security,"sec")
+                // console.log(security,"sec")
                 return (
                   <div className="watchlist-security" key={i}>
                     <div onClick={removeSecurity}>

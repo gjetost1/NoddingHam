@@ -11,7 +11,7 @@ export default function IsMarketOpen() {
     (state) => state.stock.getMarketHours.is_open
   );
 
-  console.log(`hello world`);
+  // console.log(`hello world`);
   return (
     <div>
       {/* Global notification live region, render this permanently at the end of the document */}
