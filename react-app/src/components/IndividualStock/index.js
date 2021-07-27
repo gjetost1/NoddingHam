@@ -9,6 +9,7 @@ import HistoricalDetails from "../Details/HistoricalDetails";
 import IndividualDailyDetails from "../Details/IndividualDailyDetails";
 import useMarketData from "../../websocket/useMarketData";
 import {colors} from "../Portfolio/index";
+import Loader from "../Loader";
 
 const remapData = (newData) => {
   let dataObj = {}
@@ -28,6 +29,7 @@ export default function IndividualStock() {
   const dispatch = useDispatch();
   const [data, setData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
+  const [errors, setErrors] = useState([]);
   const userId = useSelector(state => state.session.user.id)
 
   let test = useMarketData(["AAPL"]);
@@ -36,12 +38,22 @@ export default function IndividualStock() {
   useEffect(() => {
     (async function () {
       const newData = await dispatch(getIndividualSecurity(ticker))
+      .catch(async (res) => {
+        const data = await res.json();
+      if (data && data.errors) {
+        setErrors(data.errors);
+        return  setErrors([`Oops! ${ticker} doesn't seem to be recognized as a stock ticker!`]);
+      }
+    });
       const remappedData = remapData(newData);
       setData([remappedData])
       setIsLoaded(true)
     })();
   }, [])
 
+  if (!isLoaded) {
+    return <Loader/>;
+  }
   return isLoaded && (
     <div>
       <div style={{backgroundColor: colors.background_black}}>

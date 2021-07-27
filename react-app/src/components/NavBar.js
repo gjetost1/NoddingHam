@@ -1,10 +1,11 @@
-import React, {useState} from "react";
-import { useSelector } from "react-redux";
-import { NavLink, Redirect, useHistory } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { NavLink, Redirect, useHistory, useParams } from "react-router-dom";
 import LogoutButton from "./auth/LogoutButton";
 import logo from './NoddingHamCleaner.png'
 import { SearchIcon } from '@heroicons/react/solid'
 import {colors} from "./Portfolio/index";
+import { getIndividualSecurity } from "../store/stock";
 
 //handle navbar items
 
@@ -15,7 +16,26 @@ const pinkButtonClassName =
 
   const NavBar = () => {
     const history = useHistory();
+    const dispatch = useDispatch();
     const [search, setSearch] = useState('')
+    const [errors, setErrors] = useState([])
+    const {ticker} = useParams()
+
+    //ind stock error handle
+    useEffect(() => {
+      (async function () {
+        await dispatch(getIndividualSecurity(ticker))
+        .catch(async (res) => {
+          const data = await res.json();
+        if (data && data.errors) {
+          setErrors(data.errors);
+          alert("hello")
+          return setErrors([`Oops! ${ticker} doesn't seem to be recognized as a stock ticker!`]);
+        }
+      });
+
+      })();
+    }, [])
 
 
     const user = useSelector((state) => state.session.user);
@@ -78,7 +98,8 @@ const pinkButtonClassName =
                       // fix this event handling
 
                       onKeyPress={ e => {
-                        if(e.key==='Enter') {
+                        if(e.key==='Enter' && e.target.value.length < 5 && e.target.value.length > 2) {
+
                           window.location=`/stock/${e.target.value}`
                         }
                       }}
