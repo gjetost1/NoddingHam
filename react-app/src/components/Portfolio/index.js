@@ -134,7 +134,7 @@ export default function Portfolio() {
   return (
     isLoaded &&
     stats && (
-      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8" style={{backgroundColor: colors.background_black}}>
+      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8" style={{backgroundColor: colors.background_black, height:"100vh"}}>
         <div>
           <DailyDetails title="Portfolio" stats={stats} />
           <div style={{backgroundColor: colors.background_black}}>
