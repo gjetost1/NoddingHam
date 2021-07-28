@@ -6,7 +6,12 @@ function UsersList() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("/api/users/");
+      const response = await fetch("/api/users/", {
+        headers : {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+         }
+      });
       const responseData = await response.json();
       setUsers(responseData.users);
     }

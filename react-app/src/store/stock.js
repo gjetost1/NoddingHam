@@ -32,8 +32,9 @@ const deleteStock = (type, payload) => ({
 export const dashboard = () => async (dispatch) => {
   const response = await fetch("/api/dashboard", {
     headers: {
-      "Content-Type": "application/json",
-    },
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
   });
   const data = await response.json();
   if (data.errors) return;
@@ -42,7 +43,12 @@ export const dashboard = () => async (dispatch) => {
 };
 
 export const getIndividualSecurity = (ticker) => async (dispatch) => {
-  const response = await fetch(`/api/securities/${ticker}`);
+  const response = await fetch(`/api/securities/${ticker}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+  });
   const data = await response.json();
   if (data.errors) return;
   dispatch(getStock(GET_SECURITY, data));
