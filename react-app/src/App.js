@@ -20,6 +20,7 @@ import {colors} from "../src/components/Portfolio/index";
 import IsMarketOpen from "./components/Notifications/IsMarketOpen";
 import PostWatchlist from "./components/Watchlist/postToWatchlist";
 import Loader from "./components/Loader";
+import { NewDashSplash } from "./components/NewDashSplash";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -75,7 +76,7 @@ function App() {
           <ProtectedRoute path="/" exact={true}>
             <div>
               <IsMarketOpen />
-              <Portfolio />
+              <NewDashSplash/>
               {/* <Dashboard /> */}
             </div>
           </ProtectedRoute>
