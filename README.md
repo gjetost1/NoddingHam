@@ -9,7 +9,7 @@
 * [MVP Feature List](#mvp-feature-list)
 * [Application Architecture](#application-architecture)
 * [Database Schema](#database-schema)
-* [Alpaca API](#alpaca-api)
+* [Alpaca Data API](#alpaca-api)
 * [Frontend Overview](#frontend-overview)
 * [Backend Overview](#backend-overview)
 * [Conclusion](#conclusion)
