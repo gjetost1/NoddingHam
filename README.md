@@ -58,6 +58,14 @@ Authenticated users can search an individual security by their ticker symbol. Th
 
 ### Alpaca Data API
 
+![Alpaca](/images/NHAlpaca.gif)
+
+![Docs](/images/NHApacaDocs.gif)
+
+![CodeOne](/images/NHMarketData1.png)
+
+![CodeTwo](/images/NHMarketData2.png)
+
 ### Database Schema
 ![Database Schema](/images/NoddingHamDB.png)
 
