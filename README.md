@@ -34,18 +34,28 @@ Real-time and historical market data was provided by [Alpaca Data API v2](https:
 ## MVP Feature List
 * User Authentification
     * Sign Up/Login
+   
+   Users have the ability to sign up for an account by inputing the requested credentials.
 
-        ![Authentification](/images/NHLoginSignUp.gif)
+   ![Authentification](/images/NHLoginSignUp.gif)
     * Demo User
+    
+    If users want to access the site without creating an account first, they have the option of entering as a demo user.
 
-        ![DemoUser](/images/NHDemoUser.gif)
+    ![DemoUser](/images/NHDemoUser.gif)
 * Asset/Stock Detail
+
+   Authenticated users have access to data for an individual security. This includes analytical data regarding the ticker's volume, open and closing price, as well     as an interactive graph representing historical trends in that ticker's market data.
 
     ![Details](/images/NHDetails.gif)
 * Portfolio
 
+   Authenticated users can add individual securities to a portfolio. The portfolio will display a graph for each added ticker which presents the user with up to        five years of it's historical data.
+
     ![Portfolio](/images/NHPortfolio.gif)
 * Watchlist
+
+   Authenticated users can add individual securities to a watchlist. The watchlist will display a graph for each added ticker which presents the user with up to        five years of it's historical data.
 
     ![Watchlist](/images/NHWatchlist.gif)
 * Search
