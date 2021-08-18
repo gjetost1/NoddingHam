@@ -21,6 +21,7 @@ import {colors} from "../src/components/Portfolio/index";
 import IsMarketOpen from "./components/Notifications/IsMarketOpen";
 import PostWatchlist from "./components/Watchlist/postToWatchlist";
 import Loader from "./components/Loader";
+import NotFound from './components/404Page'
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -87,6 +88,9 @@ function App() {
             <Loader />
           </ProtectedRoute>
           <Route path="/dashboard" exact={true}></Route>
+          <Route path='' exact={true}>
+            <NotFound />
+          </Route>
         </Switch>
       </BrowserRouter>
     )
