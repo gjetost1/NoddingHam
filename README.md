@@ -70,4 +70,9 @@ Authenticated users can search an individual security by their ticker symbol. Th
 ![Database Schema](/images/NoddingHamDB.png)
 
 ### Frontend Overview
+
+NoddingHam's frontend was crafted utilizing a React.js / Redux.js data flow. We used Tailwind CSS to style the components and layout.
+
 ### Backend Overview
+
+NoddingHam's backend framework was structured using Python/Flask. I arranged my database using SQLAlchemy.
