@@ -12,7 +12,6 @@
 * [Alpaca Data API](#alpaca-api)
 * [Frontend Overview](#frontend-overview)
 * [Backend Overview](#backend-overview)
-* [Conclusion](#conclusion)
 
 ## Welcome to NoddingHam
 NoddingHam (a Robinhood clone) is a platform where users can track different securities and view chart visualizations based on volume, open, and closing price. Users are able to save securities to either their watchlist or their portfolio, as well as survey a plethora historical security data.
@@ -64,6 +63,3 @@ Authenticated users can search an individual security by their ticker symbol. Th
 
 ### Frontend Overview
 ### Backend Overview
-
-
-## Conclusion
